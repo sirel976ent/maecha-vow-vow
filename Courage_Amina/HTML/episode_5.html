@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Le Courage d'Amina — Épisode 5 : Le Courage de se Relever</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: #1a1a2e; font-family: 'Nunito', sans-serif; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+
+        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: linear-gradient(180deg, rgba(26,26,46,0.98) 0%, rgba(26,26,46,0.8) 100%); backdrop-filter: blur(10px); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(232,180,188,0.2); }
+        .header-title { font-size: 1rem; font-weight: 700; color: #e8b4bc; }
+        .header-episode { font-size: 0.85rem; color: #a0a0a0; }
+        .back-btn { background: none; border: none; color: #e8b4bc; font-size: 1.5rem; cursor: pointer; padding: 5px; text-decoration: none; }
+
+        .webtoon-container { width: 100%; max-width: 450px; background: #0d0d1a; padding-top: 60px; }
+
+        .episode-header { background: linear-gradient(135deg, #2a1a2e, #1a1a2e); padding: 30px 20px; text-align: center; color: white; border-bottom: 2px solid rgba(232,180,188,0.3); }
+        .episode-header .series-name { font-size: 0.8em; color: #e8b4bc; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; opacity: 0.9; }
+        .episode-header h1 { font-size: 1.6em; font-weight: 700; letter-spacing: 2px; color: #e8b4bc; }
+        .episode-header h2 { font-size: 1em; font-weight: normal; margin-top: 5px; opacity: 0.8; }
+
+        .panel { position: relative; width: 100%; overflow: hidden; }
+        .panel img { width: 100%; height: auto; display: block; }
+
+        .bubble {
+            position: absolute;
+            background: white; border: 2.5px solid #111;
+            border-radius: 18px; padding: 9px 13px;
+            font-size: 13px; line-height: 1.45;
+            max-width: 62%;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        .bubble.tl::after { content:''; position:absolute; bottom:-13px; left:22px; border-width:13px 9px 0; border-style:solid; border-color:white transparent transparent; }
+        .bubble.tl::before { content:''; position:absolute; bottom:-17px; left:20px; border-width:16px 11px 0; border-style:solid; border-color:#111 transparent transparent; }
+        .bubble.tr::after { content:''; position:absolute; bottom:-13px; right:22px; border-width:13px 9px 0; border-style:solid; border-color:white transparent transparent; }
+        .bubble.tr::before { content:''; position:absolute; bottom:-17px; right:20px; border-width:16px 11px 0; border-style:solid; border-color:#111 transparent transparent; }
+        .bubble.bl::after { content:''; position:absolute; top:-13px; left:22px; border-width:0 9px 13px; border-style:solid; border-color:transparent transparent white; }
+        .bubble.bl::before { content:''; position:absolute; top:-17px; left:20px; border-width:0 11px 16px; border-style:solid; border-color:transparent transparent #111; }
+        .bubble.br::after { content:''; position:absolute; top:-13px; right:22px; border-width:0 9px 13px; border-style:solid; border-color:transparent transparent white; }
+        .bubble.br::before { content:''; position:absolute; top:-17px; right:20px; border-width:0 11px 16px; border-style:solid; border-color:transparent transparent #111; }
+
+        .bubble.thought { border-style: dashed; font-style: italic; background: #fff8fa; border-color: #c8849a; color: #5a2a3a; }
+        .bubble.thought::after, .bubble.thought::before { display: none; }
+        .bubble.thought .dots { position: absolute; bottom: -26px; left: 16px; }
+        .bubble.thought .dots span { display: inline-block; width: 7px; height: 7px; background: #fff8fa; border: 2px dashed #c8849a; border-radius: 50%; margin-right: 3px; }
+        .bubble.thought .dots span:first-child { width: 10px; height: 10px; }
+
+        .narr {
+            background: rgba(26, 10, 20, 0.88);
+            border-left: 3px solid #e8b4bc;
+            padding: 9px 13px; font-style: italic;
+            font-size: 12px; color: #f0d0d8; line-height: 1.55;
+            width: calc(100% - 28px); margin: 0 14px;
+            position: absolute;
+            z-index: 10;
+        }
+
+        /* Sound effects */
+        .sfx {
+            position: absolute; font-family: 'Bangers', cursive; font-size: 24px;
+            color: #c8849a; text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff;
+            transform: rotate(-5deg);
+        }
+
+        .panel-separator { height: 5px; background: #1a1a2e; }
+
+        .message-final {
+            background: linear-gradient(180deg, #1a1a2e, #0d0d1a);
+            padding: 35px 20px; text-align: center;
+            border-top: 2px solid rgba(232,180,188,0.2);
+        }
+        .message-final p { font-size: 0.95rem; line-height: 1.8; color: #f5f5f5; margin-bottom: 12px; }
+        .message-final p.main-message {
+            font-size: 1.1rem; font-weight: 700; color: #e8b4bc;
+            margin-top: 18px; padding: 18px 20px;
+            border: 2px solid #e8b4bc; border-radius: 10px;
+        }
+
+        .resources {
+            background: rgba(232,180,188,0.06); padding: 28px 20px;
+            margin: 0 14px 20px; border-radius: 12px;
+            border: 1px solid rgba(232,180,188,0.22);
+        }
+        .resources h3 { color: #e8b4bc; font-size: 1rem; margin-bottom: 14px; text-align: center; }
+        .resources ul { list-style: none; padding: 0; }
+        .resources li { padding: 9px 0; border-bottom: 1px solid rgba(232,180,188,0.1); font-size: 0.85rem; color: #f5f5f5; line-height: 1.5; }
+        .resources li:last-child { border-bottom: none; }
+        .resources li strong { color: #e8b4bc; }
+
+        .episode-nav { display: flex; justify-content: space-between; padding: 10px 20px; background: #0d0d1a; border-top: 1px solid #2a1a2e; }
+        .episode-nav a { color: #e8b4bc; text-decoration: none; font-size: 14px; }
+
+        .footer { background: #1a1a2e; padding: 30px 20px; text-align: center; border-top: 1px solid rgba(232,180,188,0.1); }
+        .footer-logo { font-size: 1.1rem; font-weight: 700; color: #e8b4bc; margin-bottom: 8px; }
+        .footer-text { font-size: 0.8rem; color: #a0a0a0; line-height: 1.6; }
+        .footer-link { color: #e8b4bc; text-decoration: none; }
+
+        .scroll-top { position: fixed; bottom: 20px; right: 20px; background: #e8b4bc; color: #1a1a2e; width: 45px; height: 45px; border-radius: 50%; border: none; cursor: pointer; font-size: 1.2rem; display: none; align-items: center; justify-content: center; box-shadow: 0 3px 15px rgba(0,0,0,0.4); z-index: 99; }
+        .scroll-top.visible { display: flex; }
+
+        @media (max-width: 450px) { .bubble { font-size: 12px; padding: 8px 11px; } .narr { font-size: 11px; } }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="back-btn">←</a>
+        <div>
+            <div class="header-title">Le Courage d'Amina</div>
+            <div class="header-episode">Épisode 5 — FINAL</div>
+        </div>
+        <div style="width:30px;"></div>
+    </header>
+
+    <div class="webtoon-container">
+
+        <div class="episode-header">
+            <div class="series-name">Le Courage d'Amina</div>
+            <h1>ÉPISODE 5 — FINAL</h1>
+            <h2>Le Courage de se Relever</h2>
+        </div>
+
+        <!-- 5_00 — Matin lumineux -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_00.png" alt="Un matin lumineux">
+            <div class="narr" style="top: 14px;">
+                "Demander de l'aide n'est pas une faiblesse. C'est parfois l'acte le plus courageux qu'on puisse faire."
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 5_01 — Devant l'association -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_01.png" alt="Devant l'association">
+            <div class="narr" style="top: 14px;">
+                "Elles sont arrivées devant le local de l'association. Amina a hésité un instant."
+            </div>
+            <div class="bubble thought" style="top: 38%; left: 14px; max-width: 60%;">
+                Et si personne ne me croit... Et si je suis trop honte...
+                <div class="dots"><span></span><span></span></div>
+            </div>
+            <div class="bubble tr" style="bottom: 45px; right: 14px; max-width: 52%;">
+                Je suis là. On y va ensemble.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 5_02 — Madame Mariama -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_02.png" alt="Madame Mariama accueille les filles">
+            <div class="narr" style="top: 14px;">
+                "À l'intérieur, une femme les a accueillies avec un regard calme et doux."
+            </div>
+            <div class="bubble tl" style="bottom: 45px; left: 14px; max-width: 70%;">
+                Bonjour. Je m'appelle Mariama. Vous êtes les bienvenues ici. Asseyez-vous.
+            </div>
+            <div class="sfx" style="top: 38%; right: 14px; font-size: 18px; color: #d4a0b0; transform: rotate(-4deg);">*clic*</div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 5_03 — L'écoute -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_03.png" alt="Madame Mariama écoute Amina">
+            <div class="narr" style="top: 50%; transform: translateY(-50%);">
+                "Amina a raconté son histoire une nouvelle fois. Madame Mariama a écouté. Pas une fois elle n'a interrompu."
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 5_04 — Les mots justes -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_04.png" alt="Les mots justes de Mariama">
+            <div class="bubble tl" style="top: 18px; left: 14px; max-width: 72%;">
+                Ce que tu as vécu a un nom. Manipulation. Emprise. Exploitation. Et ce n'est pas toi la coupable. C'est celui qui a abusé de ta confiance.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 5_05 — Amina réalise -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_05.png" alt="Amina réalise la vérité">
+            <div class="bubble thought" style="top: 20px; left: 14px; max-width: 72%;">
+                Ce n'est pas ma faute. Je n'ai rien fait de mal. J'ai été piégée.
+                <div class="dots"><span></span><span></span></div>
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 5_06 — La protection -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_06.png" alt="Mariama parle de protection">
+            <div class="bubble tl" style="top: 18px; left: 14px; max-width: 70%;">
+                Tu as le droit d'être protégée. Et nous sommes là pour ça. Tu n'auras plus à affronter ça seule.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 5_07 — Le temps passe -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_07.png" alt="Le temps passe — accompagnement">
+            <div class="narr" style="top: 50%; transform: translateY(-50%);">
+                "Les jours ont passé. Puis les semaines. Amina a été accompagnée, écoutée, soutenue. Le chemin était long. Mais elle n'était plus seule."
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 5_08 — Retrouver sa dignité -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_08.png" alt="Amina retrouve sa dignité">
+            <div class="narr" style="top: 14px;">
+                "Petit à petit, Amina a retrouvé sa voix. Son sourire. Sa dignité."
+            </div>
+            <div class="bubble thought" style="bottom: 50px; right: 14px; max-width: 58%;">
+                Je me souviens de qui je suis. Je me souviens de mes rêves.
+                <div class="dots"><span></span><span></span></div>
+            </div>
+            <div class="sfx" style="bottom: 14px; left: 14px; font-size: 20px; color: #d4a0b0; transform: rotate(-3deg);">heh...</div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 5_09 — Amina et Zali — l'amitié -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_09.png" alt="Amina et Zali — l'amitié qui traverse tout">
+            <div class="narr" style="top: 14px;">
+                "Zali était toujours là. Certaines amitiés traversent tout."
+            </div>
+            <div class="bubble tr" style="top: 40%; right: 14px; max-width: 45%;">
+                Merci. Pour tout.
+            </div>
+            <div class="bubble tl" style="bottom: 45px; left: 14px; max-width: 45%;">
+                C'est ça, les amies.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 5_10 — Amina face à l'avenir -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_10.png" alt="Amina face à l'avenir">
+            <div class="bubble thought" style="top: 18px; left: 14px; max-width: 72%;">
+                Un jour, je réussirai. Et personne ne pourra m'arrêter.
+                <div class="dots"><span></span><span></span></div>
+            </div>
+        </div>
+
+        <!-- Message Final -->
+        <section class="message-final">
+            <p>Certaines manipulations commencent par des promesses rassurantes.</p>
+            <p>Quand une adolescente traverse des difficultés, elle peut devenir plus vulnérable à l'emprise, au secret et à la peur.</p>
+            <p>Mais parler, être crue et demander de l'aide peut changer le cours d'une vie.</p>
+            <p class="main-message">Le courage de parler est déjà un premier pas vers la liberté.</p>
+        </section>
+
+        <!-- Ressources -->
+        <div class="resources">
+            <h3>Besoin d'aide ?</h3>
+            <ul>
+                <li><strong>Mlezi Maoré — PSP</strong><br>Parcours de Sortie de Prostitution à Mayotte</li>
+                <li><strong>EVARS</strong><br>Espace de Vie Affective, Relationnelle et Sexuelle</li>
+                <li><strong>PMI</strong><br>Protection Maternelle et Infantile</li>
+                <li><strong>119</strong><br>Allô Enfance en Danger — appel gratuit, 24h/24</li>
+            </ul>
+        </div>
+
+        <div class="episode-nav">
+            <a href="episode_4.html">← Épisode 4</a>
+            <a href="index.html">Tous les épisodes</a>
+            <span style="color:#3a2a3a; font-size:14px;">FIN</span>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-logo">💗 Le Courage d'Amina</div>
+            <p class="footer-text">
+                Une production <a href="https://sirel976.com" class="footer-link">SIREL976</a><br>
+                En partenariat avec PSP Mayotte<br>
+                © 2026 — Tous droits réservés
+            </p>
+        </footer>
+
+    </div>
+
+    <button class="scroll-top" id="scrollTop">↑</button>
+    <script>
+        const scrollBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => { scrollBtn.classList.toggle('visible', window.scrollY > 500); });
+        scrollBtn.addEventListener('click', () => { window.scrollTo({top:0,behavior:'smooth'}); });
+    </script>
+</body>
+</html>

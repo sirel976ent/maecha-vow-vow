@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maecha VowVow - Épisode 4 : La Main Tendue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #1a1a2e;
+            font-family: 'Comic Neue', cursive;
+            display: flex;
+            justify-content: center;
+        }
+
+        .webtoon-container { width: 100%; max-width: 450px; background: #000; }
+
+        /* HEADER - Vert/bleu apaisant pour la guérison */
+        .episode-header {
+            background: linear-gradient(135deg, #11998e, #2E86AB);
+            padding: 20px; text-align: center; color: white;
+        }
+        .episode-header h1 {
+            font-family: 'Bangers', cursive; font-size: 2em;
+            letter-spacing: 2px; color: #F6AE2D;
+        }
+        .episode-header h2 { font-size: 1.2em; font-weight: normal; margin-top: 5px; opacity: 0.9; }
+
+        /* PANELS */
+        .panel { position: relative; width: 100%; overflow: hidden; }
+        .panel img { width: 100%; height: auto; display: block; }
+
+        /* BULLES DIALOGUE */
+        .bubble {
+            position: absolute; background: white; border: 3px solid #000;
+            border-radius: 20px; padding: 12px 16px; font-size: 14px;
+            line-height: 1.4; max-width: 70%;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        .bubble::after {
+            content: ''; position: absolute; bottom: -15px; left: 30px;
+            border-width: 15px 10px 0; border-style: solid;
+            border-color: white transparent transparent;
+        }
+        .bubble::before {
+            content: ''; position: absolute; bottom: -20px; left: 28px;
+            border-width: 18px 12px 0; border-style: solid;
+            border-color: #000 transparent transparent;
+        }
+        .bubble.right::after { left: auto; right: 30px; }
+        .bubble.right::before { left: auto; right: 28px; }
+
+        /* BULLES PENSEE */
+        .bubble.thought { border-radius: 50%; font-style: italic; background: #f8f8f8; }
+        .bubble.thought::after, .bubble.thought::before { display: none; }
+        .bubble.thought .thought-dots { position: absolute; bottom: -25px; left: 20px; }
+        .bubble.thought .thought-dots span {
+            display: inline-block; background: #f8f8f8;
+            border: 2px solid #000; border-radius: 50%; margin: 0 2px;
+        }
+        .bubble.thought .thought-dots span:nth-child(1) { width: 12px; height: 12px; }
+        .bubble.thought .thought-dots span:nth-child(2) { width: 8px; height: 8px; }
+
+        /* NARRATEUR */
+        .narrator-box {
+            position: absolute; background: #FFF8E7; border: 2px solid #8B7355;
+            padding: 10px 15px; font-style: italic; font-size: 13px;
+            max-width: 80%; box-shadow: 2px 2px 0 rgba(0,0,0,0.2); color: #333;
+        }
+
+        /* SFX */
+        .sfx {
+            position: absolute; font-family: 'Bangers', cursive; font-size: 24px;
+            color: #FF6B35; text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff;
+            transform: rotate(-5deg);
+        }
+
+        /* TRANSITION */
+        .transition-text {
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            color: white; font-family: 'Bangers', cursive; font-size: 1.4em;
+            letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            text-align: center; width: 90%;
+        }
+
+        /* SEPARATEUR */
+        .panel-separator { height: 5px; background: #1a1a2e; }
+
+        /* FOOTER */
+        .episode-footer {
+            background: linear-gradient(135deg, #1a1a2e, #11998e);
+            padding: 30px 20px; text-align: center; color: white;
+        }
+        .episode-footer .to-be-continued {
+            font-family: 'Bangers', cursive; font-size: 2em;
+            color: #F6AE2D; letter-spacing: 3px;
+        }
+
+        /* NAV */
+        .episode-nav {
+            display: flex; justify-content: space-between; padding: 10px 20px;
+            background: #111; border-top: 1px solid #333;
+        }
+        .episode-nav a { color: #7289DA; text-decoration: none; font-size: 14px; }
+
+        @media (max-width: 450px) {
+            .bubble { font-size: 12px; padding: 10px 12px; }
+            .sfx { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="webtoon-container">
+
+        <!-- HEADER -->
+        <div class="episode-header">
+            <h1>MAECHA VOWVOW</h1>
+            <h2>Épisode 4 : La Main Tendue</h2>
+        </div>
+
+        <!-- ================================================ -->
+        <!-- 4_00 : Transition ouverture - Matin paisible -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_00.png" alt="Matin paisible dans un quartier de Mayotte">
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_01 : Meïssa et Inaya sur un banc -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_01.png" alt="Meïssa et Inaya assises sur un banc">
+
+            <div class="bubble right" style="top: 15px; right: 15px; max-width: 70%;">
+                Ce mec, c'est un manipulateur. C'est PAS ta faute.
+            </div>
+
+            <div class="bubble right" style="top: 100px; right: 15px; max-width: 75%;">
+                Y'a une association Mlezi Maore, ils ont un service appelé PSP. Ils aident les jeunes comme toi.
+            </div>
+
+            <div class="bubble" style="bottom: 70px; left: 15px; max-width: 55%;">
+                Ils vont me juger...
+            </div>
+
+            <div class="bubble right" style="bottom: 15px; right: 15px; max-width: 40%;">
+                Non. Promis.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_02 : Gros plan mains qui se tiennent -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_02.png" alt="Deux mains qui se serrent">
+
+            <div class="bubble right" style="bottom: 40px; right: 15px; max-width: 55%;">
+                Je serai avec toi.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_03 : Inaya hésite à appeler -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_03.png" alt="Inaya hésite, téléphone en main">
+
+            <div class="bubble thought" style="top: 30px; left: 15px; max-width: 60%;">
+                Allez... Tu peux le faire...
+                <div class="thought-dots">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_04 : Inaya au téléphone avec Meïssa -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_04.png" alt="Inaya au téléphone, Meïssa à côté">
+
+            <div class="bubble" style="top: 25px; left: 15px; max-width: 65%;">
+                Bonjour... Je... j'ai besoin d'aide...
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_05 : Bureau de Maya, accueillant -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_05.png" alt="Maya accueille Inaya dans son bureau">
+
+            <div class="bubble right" style="top: 20px; right: 15px; max-width: 75%;">
+                Bienvenue Inaya. Assieds-toi, tu es en sécurité ici.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_06 : Maya explique avec compassion -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_06.png" alt="Maya parle avec compassion">
+
+            <div class="bubble right" style="top: 15px; right: 15px; max-width: 70%;">
+                Ce qui t'est arrivé, ça s'appelle du chantage.
+            </div>
+
+            <div class="bubble right" style="top: 100px; right: 15px; max-width: 70%;">
+                Tu n'es pas coupable. C'est LUI le criminel.
+            </div>
+
+            <div class="bubble right" style="bottom: 40px; right: 15px; max-width: 50%; font-weight: bold;">
+                La loi te protège.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_07 : Inaya comprend (soulagement) -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_07.png" alt="Inaya soulagée, larmes de soulagement">
+
+            <div class="bubble" style="top: 25px; left: 15px; max-width: 70%;">
+                Je... je suis pas... une mauvaise personne ?
+            </div>
+
+            <div class="bubble right" style="bottom: 40px; right: 15px; max-width: 75%;">
+                Non Inaya. Tu es une victime. Et tu es courageuse d'être venue.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_08 : Réconciliation mère et Inaya -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_08.png" alt="Mère et Inaya sur le canapé, réconciliation">
+
+            <div class="bubble right" style="top: 15px; right: 15px; max-width: 70%;">
+                Pourquoi tu m'as pas parlé, ma fille...
+            </div>
+
+            <div class="bubble" style="top: 110px; left: 15px; max-width: 70%;">
+                J'avais honte maman... Je voulais juste t'aider...
+            </div>
+
+            <div class="bubble right" style="bottom: 40px; right: 15px; max-width: 60%; font-weight: bold;">
+                On va s'en sortir. Ensemble.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_09 : Câlin mère-fille -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_09.png" alt="Câlin entre Inaya et sa mère">
+
+            <div class="bubble right" style="top: 25px; right: 15px; max-width: 60%; font-weight: bold;">
+                Je t'aime. Quoi qu'il arrive.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_10 : Inaya regarde le coucher de soleil -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_10.png" alt="Inaya regarde le coucher de soleil par la fenêtre">
+
+            <div class="bubble thought" style="bottom: 50px; right: 15px; max-width: 55%;">
+                Demain sera différent.
+                <div class="thought-dots" style="left: auto; right: 20px;">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 4_11 : Transition fin - Coucher de soleil océan -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP4/4_11.png" alt="Coucher de soleil sur l'océan à Mayotte">
+        </div>
+
+        <!-- FOOTER -->
+        <div class="episode-footer">
+            <div class="to-be-continued">À SUIVRE...</div>
+            <p style="margin-top: 15px; opacity: 0.8;">Épisode 5 : Renaître (Final)</p>
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="episode-nav">
+            <a href="episode_3.html">&larr; Épisode 3</a>
+            <a href="index.html">Accueil</a>
+            <a href="episode_5.html">Épisode 5 &rarr;</a>
+        </div>
+
+    </div>
+</body>
+</html>

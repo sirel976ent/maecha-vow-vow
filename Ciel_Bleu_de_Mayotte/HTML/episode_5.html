@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Ciel Bleu de Mayotte - Épisode 5 : Renaître</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a1628;
+            font-family: 'Comic Neue', cursive;
+            display: flex;
+            justify-content: center;
+        }
+
+        .webtoon-container { width: 100%; max-width: 450px; background: #000; }
+
+        .episode-header {
+            background: linear-gradient(135deg, #1a5a7a, #0a1628);
+            padding: 20px; text-align: center; color: white;
+        }
+        .episode-header .series-name {
+            font-size: 0.8em; color: #4aa8c8; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 6px; opacity: 0.9;
+        }
+        .episode-header h1 {
+            font-family: 'Bangers', cursive; font-size: 1.8em;
+            letter-spacing: 2px; color: #4aa8c8;
+        }
+        .episode-header h2 { font-size: 1.1em; font-weight: normal; margin-top: 5px; opacity: 0.9; }
+
+        .panel { position: relative; width: 100%; overflow: hidden; }
+        .panel img { width: 100%; height: auto; display: block; }
+
+        /* Dialogue bubble — tail bottom-left by default */
+        .bubble {
+            position: absolute;
+            background: rgba(255,255,255,0.82); border: 2.5px solid #111;
+            border-radius: 18px; padding: 9px 13px;
+            font-size: 13px; line-height: 1.45;
+            max-width: 62%;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.25);
+        }
+        /* tail pointing down-left */
+        .bubble.tl::after {
+            content: ''; position: absolute; bottom: -13px; left: 22px;
+            border-width: 13px 9px 0; border-style: solid;
+            border-color: rgba(255,255,255,0.82) transparent transparent;
+        }
+        .bubble.tl::before {
+            content: ''; position: absolute; bottom: -17px; left: 20px;
+            border-width: 16px 11px 0; border-style: solid;
+            border-color: #111 transparent transparent;
+        }
+        /* tail pointing down-right */
+        .bubble.tr::after {
+            content: ''; position: absolute; bottom: -13px; right: 22px;
+            border-width: 13px 9px 0; border-style: solid;
+            border-color: rgba(255,255,255,0.82) transparent transparent;
+        }
+        .bubble.tr::before {
+            content: ''; position: absolute; bottom: -17px; right: 20px;
+            border-width: 16px 11px 0; border-style: solid;
+            border-color: #111 transparent transparent;
+        }
+        /* tail pointing up-left */
+        .bubble.bl::after {
+            content: ''; position: absolute; top: -13px; left: 22px;
+            border-width: 0 9px 13px; border-style: solid;
+            border-color: transparent transparent rgba(255,255,255,0.82);
+        }
+        .bubble.bl::before {
+            content: ''; position: absolute; top: -17px; left: 20px;
+            border-width: 0 11px 16px; border-style: solid;
+            border-color: transparent transparent #111;
+        }
+
+        /* tail pointing up-right */
+        .bubble.br::after {
+            content: ''; position: absolute; top: -13px; right: 22px;
+            border-width: 0 9px 13px; border-style: solid;
+            border-color: transparent transparent rgba(255,255,255,0.82);
+        }
+        .bubble.br::before {
+            content: ''; position: absolute; top: -17px; right: 20px;
+            border-width: 0 11px 16px; border-style: solid;
+            border-color: transparent transparent #111;
+        }
+
+        /* Thought bubble */
+        .bubble.thought {
+            border-style: dashed; font-style: italic;
+            background: rgba(246,246,255,0.82); border-color: #555;
+        }
+        .bubble.thought::after, .bubble.thought::before { display: none; }
+        .bubble.thought .dots { position: absolute; bottom: -26px; left: 16px; }
+        .bubble.thought .dots span {
+            display: inline-block; width: 7px; height: 7px;
+            background: rgba(246,246,255,0.82); border: 2px dashed #555;
+            border-radius: 50%; margin-right: 3px;
+        }
+        .bubble.thought .dots span:first-child { width: 10px; height: 10px; }
+
+        /* Narrator box */
+        .narr {
+            background: rgba(8, 18, 35, 0.88);
+            border-left: 3px solid #4aa8c8;
+            padding: 9px 13px; font-style: italic;
+            font-size: 12px; color: #c0dff0; line-height: 1.55;
+            width: calc(100% - 28px); margin: 0 14px;
+            position: absolute;
+        }
+
+        /* Sound effects */
+        .sfx {
+            position: absolute; font-family: 'Bangers', cursive; font-size: 24px;
+            color: #4aa8d8; text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff;
+            transform: rotate(-5deg);
+        }
+
+        .panel-separator { height: 5px; background: #0a1628; }
+
+        .episode-footer {
+            background: linear-gradient(135deg, #0a1628, #1a5a7a);
+            padding: 30px 20px; text-align: center; color: white;
+        }
+        .episode-footer .to-be-continued {
+            font-family: 'Bangers', cursive; font-size: 2em;
+            color: #4aa8c8; letter-spacing: 3px;
+        }
+
+        .episode-nav {
+            display: flex; justify-content: space-between;
+            padding: 10px 20px; background: #070f1a;
+            border-top: 1px solid #1a3a5a;
+        }
+        .episode-nav a { color: #4aa8c8; text-decoration: none; font-size: 14px; }
+        .episode-nav .off { color: #1e3a52; font-size: 14px; }
+
+        .info-box {
+            background: #1a3a5a;
+            border-left: 4px solid #4aa8c8;
+            color: white;
+            padding: 16px 20px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 450px) {
+            .bubble { font-size: 12px; padding: 8px 11px; }
+            .narr { font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+<div class="webtoon-container">
+
+    <div class="episode-header">
+        <div class="series-name">Le Ciel Bleu de Mayotte</div>
+        <h1>ÉPISODE 5</h1>
+        <h2>Renaître</h2>
+    </div>
+
+    <!-- ——— 5_00 ——— Centre d'Accueil PSP (paysage, pas de personnage) -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_00.png" alt="Centre d'Accueil PSP Mayotte">
+        <div class="narr" style="bottom: 18px;">
+            "Le Centre d'Accueil PSP Mayotte. Là où les histoires peuvent recommencer."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_01 ——— Maria assise, méfiante, dans le centre -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_01.png" alt="Maria assise, sur la défensive, dans le centre d'accueil">
+        <div class="narr" style="top: 14px;">
+            "Les premières heures. Je m'attendais à ce qu'on me demande quelque chose en échange. Je ne savais plus comment faire confiance."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_02 ——— Aïcha pose sa main sur les mains de Maria -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_02.png" alt="Aïcha pose sa main sur les mains de Maria à une table">
+        <div class="narr" style="top: 14px;">
+            "Aïcha ne posait pas de questions. Elle était juste là. Présente. Ça m'a pris du temps pour comprendre que c'est ça, la vraie aide."
+        </div>
+        <div class="bubble tl" style="bottom: 50px; left: 14px; max-width: 60%;">
+            Tu n'es plus toute seule maintenant.
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_03 ——— Ben à son bureau avec des formulaires -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_03.png" alt="Ben à son bureau avec des formulaires administratifs">
+        <div class="narr" style="top: 14px;">
+            "Les papiers. Les démarches. Une nouvelle identité légale, construite brique par brique. Pour la première fois, quelqu'un travaillait pour moi — et non sur moi."
+        </div>
+        <div class="bubble tr" style="top: 38%; left: 14px; max-width: 62%;">
+            On va commencer par établir ta situation. Étape par étape.
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_04 ——— Gros plan, premier vrai sourire -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_04.png" alt="Gros plan sur le premier vrai sourire de Maria">
+        <div class="narr" style="bottom: 18px;">
+            "Jour 12. Je me suis souri dans un miroir. Pas longtemps. Mais c'était moi."
+        </div>
+        <div class="sfx" style="top: 14px; right: 18px; font-size: 16px; color: #5aaa8a; transform: rotate(-3deg);">heh...</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_05 ——— Atelier couture avec d'autres femmes -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_05.png" alt="Maria dans un atelier de couture avec d'autres femmes">
+        <div class="narr" style="top: 14px;">
+            "Les ateliers. Les mains occupées. Réapprendre que mon corps m'appartient. Que le temps peut être doux."
+        </div>
+        <div class="sfx" style="bottom: 18px; left: 18px; font-size: 16px; color: #4aa8c8; transform: rotate(-4deg);">SSHHH</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_06 ——— Cercle de soutien, Maria écoute -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_06.png" alt="Cercle de parole, Maria écoute en silence">
+        <div class="narr" style="top: 14px;">
+            "Je n'avais pas encore parlé. Mais j'écoutais les autres. Et parfois, savoir qu'on n'est pas seule... ça suffit à respirer."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_07 ——— Aïcha propose à Maria de témoigner -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_07.png" alt="Aïcha propose à Maria de témoigner un soir">
+        <div class="narr" style="top: 14px;">
+            "Un soir, Aïcha m'a posé une question que je n'attendais pas."
+        </div>
+        <div class="bubble tr" style="top: 26%; left: 14px; max-width: 62%;">
+            Tu voudrais peut-être... témoigner ? Pas maintenant. Quand tu seras prête.
+        </div>
+        <div class="bubble tl" style="top: 55%; right: 14px; max-width: 58%;">
+            Témoigner... pour que d'autres ne vivent pas ça ?
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_08 ——— Gros plan Maria déterminée -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_08.png" alt="Gros plan sur le visage déterminé de Maria">
+        <div class="narr" style="top: 14px;">
+            "J'ai réfléchi longtemps. Est-ce que j'étais prête à raconter ? Est-ce que c'était à moi de le faire ?"
+        </div>
+        <div class="bubble thought" style="bottom: 90px; left: 14px; max-width: 64%;">
+            Si mon histoire peut éviter ça à une seule personne...
+            <div class="dots"><span></span><span></span></div>
+        </div>
+        <div class="bubble tl" style="top: 14px; right: 14px; max-width: 52%;">
+            Oui. Je veux le faire.
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_09 ——— Maria au marché, jeune fille perdue en arrière-plan -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_09.png" alt="Maria au marché, jeune fille perdue visible en arrière-plan">
+        <div class="narr" style="top: 14px;">
+            "Trois mois plus tard. Je suis retournée au marché. Et je l'ai vue."
+        </div>
+        <div class="bubble thought" style="bottom: 44px; right: 14px; max-width: 60%;">
+            Ce regard... ce vide dans les yeux. Je le connais.
+            <div class="dots"><span></span><span></span></div>
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_10 ——— Maria tend un papier à la jeune fille assise (miroir EP4) -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_10.png" alt="Maria tend un papier à une jeune fille assise, miroir de l'EP4">
+        <div class="narr" style="top: 14px;">
+            "Je n'ai pas hésité."
+        </div>
+        <div class="bubble bl" style="bottom: 50px; left: 14px; max-width: 60%;">
+            Tiens. Appelle ce numéro. N'attends pas.
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 5_11 ——— Scène finale : plage, lagon, ciel bleu (pas de dialogue) -->
+    <div class="panel">
+        <img src="../IMAGES/EP5/5_11.png" alt="Vue finale sur le lagon et le ciel bleu de Mayotte">
+        <div class="narr" style="bottom: 18px;">
+            "Le ciel bleu de Mayotte. Il avait toujours été là. Je réapprenais, enfin, à lever les yeux."
+        </div>
+    </div>
+    <div class="info-box">
+        Si toi ou quelqu'un que tu connais est en danger :<br>
+        PSP Mayotte — Aide aux jeunes : 02 69 61 XX XX<br>
+        En cas d'urgence : 17 (Police) / 15 (SAMU) / 119 (Enfance en danger)
+    </div>
+
+    <!-- FOOTER -->
+    <div class="episode-footer">
+        <div class="to-be-continued">FIN</div>
+        <p style="margin-top: 12px; opacity: 0.8; font-size: 0.9em;">Merci d'avoir lu Le Ciel Bleu de Mayotte.</p>
+    </div>
+
+    <div class="episode-nav">
+        <a href="episode_4.html">← Épisode 4</a>
+        <span class="off">FIN</span>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Courage d'Amina — Épisode 1 : Les Rêves d'Amina</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #1a1a2e; font-family: 'Nunito', sans-serif; display: flex; justify-content: center; }
+        .webtoon-container { width: 100%; max-width: 450px; background: #0d0d1a; }
+
+        .episode-header {
+            background: linear-gradient(135deg, #2a1a2e, #1a1a2e);
+            padding: 20px; text-align: center; color: white;
+            border-bottom: 2px solid rgba(232,180,188,0.3);
+        }
+        .episode-header .series-name { font-size: 0.8em; color: #e8b4bc; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; opacity: 0.9; }
+        .episode-header h1 { font-size: 1.6em; font-weight: 700; letter-spacing: 2px; color: #e8b4bc; }
+        .episode-header h2 { font-size: 1em; font-weight: normal; margin-top: 5px; opacity: 0.8; }
+
+        .panel { position: relative; width: 100%; overflow: hidden; }
+        .panel img { width: 100%; height: auto; display: block; }
+
+        .bubble {
+            position: absolute;
+            background: white; border: 2.5px solid #111;
+            border-radius: 18px; padding: 9px 13px;
+            font-size: 13px; line-height: 1.45;
+            max-width: 62%;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+        .bubble.tl::after { content:''; position:absolute; bottom:-13px; left:22px; border-width:13px 9px 0; border-style:solid; border-color:white transparent transparent; }
+        .bubble.tl::before { content:''; position:absolute; bottom:-17px; left:20px; border-width:16px 11px 0; border-style:solid; border-color:#111 transparent transparent; }
+        .bubble.tr::after { content:''; position:absolute; bottom:-13px; right:22px; border-width:13px 9px 0; border-style:solid; border-color:white transparent transparent; }
+        .bubble.tr::before { content:''; position:absolute; bottom:-17px; right:20px; border-width:16px 11px 0; border-style:solid; border-color:#111 transparent transparent; }
+        .bubble.bl::after { content:''; position:absolute; top:-13px; left:22px; border-width:0 9px 13px; border-style:solid; border-color:transparent transparent white; }
+        .bubble.bl::before { content:''; position:absolute; top:-17px; left:20px; border-width:0 11px 16px; border-style:solid; border-color:transparent transparent #111; }
+        .bubble.br::after { content:''; position:absolute; top:-13px; right:22px; border-width:0 9px 13px; border-style:solid; border-color:transparent transparent white; }
+        .bubble.br::before { content:''; position:absolute; top:-17px; right:20px; border-width:0 11px 16px; border-style:solid; border-color:transparent transparent #111; }
+
+        .bubble.thought { border-style: dashed; font-style: italic; background: #fff8fa; border-color: #c8849a; color: #5a2a3a; }
+        .bubble.thought::after, .bubble.thought::before { display: none; }
+        .bubble.thought .dots { position: absolute; bottom: -26px; left: 16px; }
+        .bubble.thought .dots span { display: inline-block; width: 7px; height: 7px; background: #fff8fa; border: 2px dashed #c8849a; border-radius: 50%; margin-right: 3px; }
+        .bubble.thought .dots span:first-child { width: 10px; height: 10px; }
+
+        .narr {
+            background: rgba(26, 10, 20, 0.88);
+            border-left: 3px solid #e8b4bc;
+            padding: 9px 13px; font-style: italic;
+            font-size: 12px; color: #f0d0d8; line-height: 1.55;
+            width: calc(100% - 28px); margin: 0 14px;
+            position: absolute;
+        }
+
+        /* Sound effects */
+        .sfx {
+            position: absolute; font-family: 'Bangers', cursive; font-size: 24px;
+            color: #c8849a; text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff;
+            transform: rotate(-5deg);
+        }
+
+        .panel-separator { height: 5px; background: #1a1a2e; }
+
+        .episode-footer {
+            background: linear-gradient(135deg, #1a1a2e, #2a1a2e);
+            padding: 30px 20px; text-align: center; color: white;
+            border-top: 2px solid rgba(232,180,188,0.2);
+        }
+        .to-be-continued { font-size: 1.6em; font-weight: 700; color: #e8b4bc; letter-spacing: 3px; }
+
+        .episode-nav { display: flex; justify-content: space-between; padding: 10px 20px; background: #0d0d1a; border-top: 1px solid #2a1a2e; }
+        .episode-nav a { color: #e8b4bc; text-decoration: none; font-size: 14px; }
+        .episode-nav .off { color: #3a2a3a; font-size: 14px; }
+
+        @media (max-width: 450px) { .bubble { font-size: 12px; padding: 8px 11px; } .narr { font-size: 11px; } }
+    </style>
+</head>
+<body>
+<div class="webtoon-container">
+
+    <div class="episode-header">
+        <div class="series-name">Le Courage d'Amina</div>
+        <h1>ÉPISODE 1</h1>
+        <h2>Les Rêves d'Amina</h2>
+    </div>
+
+    <!-- 1_00 — Paysage Mayotte -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_00.png" alt="Mayotte au lever du soleil">
+        <div class="narr" style="bottom: 18px;">
+            "Mayotte. Une île où les rêves sont parfois aussi vastes que l'océan qui l'entoure."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 1_01 — Amina dans la rue -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_01.png" alt="Amina marche dans la rue">
+        <div class="narr" style="top: 14px;">
+            "Amina a 16 ans. Elle vit entre les journées d'école, les rêves d'avenir et les inquiétudes qu'elle garde souvent pour elle."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 1_02 — Amina en classe -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_02.png" alt="Amina concentrée en classe">
+        <div class="narr" style="top: 14px;">
+            "Au lycée, elle travaillait dur. Les études, c'était sa chance de construire quelque chose de mieux."
+        </div>
+        <div class="bubble thought" style="bottom: 45px; right: 14px; max-width: 58%;">
+            Il faut que je réussisse... pour nous deux.
+            <div class="dots"><span></span><span></span></div>
+        </div>
+        <div class="sfx" style="bottom: 28px; left: 14px; font-size: 18px; color: #d4a0b0; transform: rotate(-3deg);">scratch scratch...</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 1_03 — Amina + Zali -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_03.png" alt="Amina et Zali dans la cour">
+        <div class="narr" style="top: 14px;">
+            "Avec Zali, tout semblait un peu plus léger."
+        </div>
+        <div class="bubble tl" style="top: 35%; left: 14px; max-width: 58%;">
+            Tu penses encore trop !
+        </div>
+        <div class="bubble tr" style="bottom: 50px; right: 14px; max-width: 55%;">
+            Peut-être...
+        </div>
+        <div class="sfx" style="bottom: 14px; left: 14px; font-size: 20px; color: #d4a0b0; transform: rotate(3deg);">HA HA</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 1_04 — Complicité -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_04.png" alt="Les deux amies rient ensemble">
+        <div class="narr" style="bottom: 18px;">
+            "Ensemble, elles partageaient leurs rêves, leurs peurs, leurs secrets."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 1_05 — Amina rentre seule -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_05.png" alt="Amina rentre seule, inquiète">
+        <div class="narr" style="top: 14px;">
+            "Mais en rentrant chez elle, les soucis revenaient."
+        </div>
+        <div class="bubble thought" style="bottom: 50px; left: 14px; max-width: 60%;">
+            Comment on va faire ce mois-ci...
+            <div class="dots"><span></span><span></span></div>
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 1_06 — Amina + sa mère -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_06.png" alt="Amina regarde sa mère avec inquiétude">
+        <div class="narr" style="top: 14px;">
+            "Amina voulait réussir. Pour elle. Pour sa mère. Pour ne plus voir l'inquiétude remplir la maison."
+        </div>
+        <div class="bubble thought" style="bottom: 45px; right: 14px; max-width: 60%;">
+            Je dois trouver un moyen de l'aider...
+            <div class="dots"><span></span><span></span></div>
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 1_07 — Close-up pensées -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_07.png" alt="Close-up Amina pensive">
+        <div class="bubble thought" style="bottom: 50px; left: 14px; max-width: 58%;">
+            Si seulement je pouvais faire quelque chose... trouver un moyen d'aider...
+            <div class="dots"><span></span><span></span></div>
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 1_08 — Le soir -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_08.png" alt="Amina rêveuse le soir">
+        <div class="narr" style="top: 14px;">
+            "Le soir, dans sa chambre, Amina rêvait d'un avenir où tout serait plus simple."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 1_09 — Les rêves -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_09.png" alt="Amina pleine d'espoir">
+        <div class="bubble thought" style="top: 18px; left: 14px; max-width: 72%;">
+            Un jour, je réussirai. Un jour, maman n'aura plus à s'inquiéter.
+            <div class="dots"><span></span><span></span></div>
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 1_10 — Transition fermeture -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_10.png" alt="Le soir tombe sur Mayotte">
+        <div class="narr" style="bottom: 18px;">
+            "Elle ne savait pas encore que certaines rencontres peuvent changer le cours d'une vie. Pour le meilleur... ou pour le pire."
+        </div>
+    </div>
+
+    <div class="episode-footer">
+        <div class="to-be-continued">À SUIVRE...</div>
+        <p style="margin-top: 12px; opacity: 0.7; font-size: 0.9em;">Épisode 2 : Les Promesses de David</p>
+    </div>
+
+    <div class="episode-nav">
+        <span class="off">← Précédent</span>
+        <a href="index.html">Tous les épisodes</a>
+        <a href="episode_2.html">Épisode 2 →</a>
+    </div>
+
+</div>
+</body>
+</html>

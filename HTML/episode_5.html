@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maecha VowVow - Épisode 5 : Renaître (FINAL)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #1a1a2e;
+            font-family: 'Comic Neue', cursive;
+            display: flex;
+            justify-content: center;
+        }
+
+        .webtoon-container { width: 100%; max-width: 450px; background: #000; }
+
+        /* HEADER - Doré chaleureux pour le final */
+        .episode-header {
+            background: linear-gradient(135deg, #F6AE2D, #2E86AB);
+            padding: 20px; text-align: center; color: white;
+        }
+        .episode-header h1 {
+            font-family: 'Bangers', cursive; font-size: 2em;
+            letter-spacing: 2px; color: #fff;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+        .episode-header h2 { font-size: 1.2em; font-weight: normal; margin-top: 5px; }
+        .episode-header .badge-final {
+            display: inline-block; background: #fff; color: #F6AE2D;
+            font-family: 'Bangers', cursive; font-size: 0.8em;
+            padding: 3px 12px; border-radius: 12px; margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* PANELS */
+        .panel { position: relative; width: 100%; overflow: hidden; }
+        .panel img { width: 100%; height: auto; display: block; }
+
+        /* BULLES DIALOGUE */
+        .bubble {
+            position: absolute; background: white; border: 3px solid #000;
+            border-radius: 20px; padding: 12px 16px; font-size: 14px;
+            line-height: 1.4; max-width: 70%;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        .bubble::after {
+            content: ''; position: absolute; bottom: -15px; left: 30px;
+            border-width: 15px 10px 0; border-style: solid;
+            border-color: white transparent transparent;
+        }
+        .bubble::before {
+            content: ''; position: absolute; bottom: -20px; left: 28px;
+            border-width: 18px 12px 0; border-style: solid;
+            border-color: #000 transparent transparent;
+        }
+        .bubble.right::after { left: auto; right: 30px; }
+        .bubble.right::before { left: auto; right: 28px; }
+
+        /* BULLES PENSEE */
+        .bubble.thought { border-radius: 50%; font-style: italic; background: #f8f8f8; }
+        .bubble.thought::after, .bubble.thought::before { display: none; }
+        .bubble.thought .thought-dots { position: absolute; bottom: -25px; left: 20px; }
+        .bubble.thought .thought-dots span {
+            display: inline-block; background: #f8f8f8;
+            border: 2px solid #000; border-radius: 50%; margin: 0 2px;
+        }
+        .bubble.thought .thought-dots span:nth-child(1) { width: 12px; height: 12px; }
+        .bubble.thought .thought-dots span:nth-child(2) { width: 8px; height: 8px; }
+
+        /* NARRATEUR */
+        .narrator-box {
+            position: absolute; background: #FFF8E7; border: 2px solid #8B7355;
+            padding: 10px 15px; font-style: italic; font-size: 13px;
+            max-width: 80%; box-shadow: 2px 2px 0 rgba(0,0,0,0.2); color: #333;
+        }
+
+        /* SFX */
+        .sfx {
+            position: absolute; font-family: 'Bangers', cursive; font-size: 24px;
+            color: #FF6B35; text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff;
+            transform: rotate(-5deg);
+        }
+
+        /* BULLE DIRECTE LECTEUR */
+        .bubble.direct {
+            background: linear-gradient(135deg, #FFF8E7, #fff);
+            border-color: #F6AE2D; border-width: 3px;
+            box-shadow: 0 4px 15px rgba(246,174,45,0.3);
+        }
+        .bubble.direct::before { border-color: #F6AE2D transparent transparent; }
+        .bubble.direct::after { border-color: #FFF8E7 transparent transparent; }
+
+        /* RESSOURCES BOX */
+        .resources-box {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            margin: 0; padding: 25px 20px; color: white;
+        }
+        .resources-box h3 {
+            font-family: 'Bangers', cursive; font-size: 1.5em;
+            margin-bottom: 15px; text-align: center; letter-spacing: 2px;
+        }
+        .resource-item {
+            background: rgba(255,255,255,0.2); padding: 12px 15px;
+            border-radius: 12px; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 12px;
+            font-size: 14px;
+        }
+        .resource-item .icon { font-size: 24px; }
+        .resource-item .name { font-weight: bold; }
+        .resource-item .number { opacity: 0.9; font-size: 13px; }
+
+        /* TRANSITION */
+        .transition-text {
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            color: white; font-family: 'Bangers', cursive; font-size: 1.4em;
+            letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            text-align: center; width: 90%;
+        }
+
+        /* FIN */
+        .fin-text {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: #F6AE2D; font-family: 'Bangers', cursive; font-size: 3em;
+            letter-spacing: 5px; text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+        }
+
+        /* SEPARATEUR */
+        .panel-separator { height: 5px; background: #1a1a2e; }
+
+        /* FOOTER FINAL */
+        .episode-footer {
+            background: linear-gradient(135deg, #F6AE2D, #2E86AB, #1a1a2e);
+            padding: 40px 20px; text-align: center; color: white;
+        }
+        .episode-footer .fin-title {
+            font-family: 'Bangers', cursive; font-size: 2.5em;
+            color: #fff; letter-spacing: 5px;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+        .episode-footer .credits {
+            margin-top: 20px; font-size: 0.9em; line-height: 1.8; opacity: 0.9;
+        }
+
+        /* NAV */
+        .episode-nav {
+            display: flex; justify-content: space-between; padding: 10px 20px;
+            background: #111; border-top: 1px solid #333;
+        }
+        .episode-nav a { color: #7289DA; text-decoration: none; font-size: 14px; }
+
+        @media (max-width: 450px) {
+            .bubble { font-size: 12px; padding: 10px 12px; }
+            .sfx { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="webtoon-container">
+
+        <!-- HEADER -->
+        <div class="episode-header">
+            <h1>MAECHA VOWVOW</h1>
+            <h2>Épisode 5 : Renaître</h2>
+            <div class="badge-final">ÉPISODE FINAL</div>
+        </div>
+
+        <!-- ================================================ -->
+        <!-- 5_00 : Transition ouverture - Matin lumineux -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_00.png" alt="Matin lumineux à Mayotte, fleurs et verdure">
+            <div class="narrator-box" style="top: 15px; left: 15px;">
+                3 mois plus tard...
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_01 : Inaya confiante à l'école -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_01.png" alt="Inaya marche fièrement dans la cour du lycée">
+            <div class="narrator-box" style="bottom: 15px; left: 15px; max-width: 85%;">
+                Le chemin a été long, mais Inaya a repris sa vie en main.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_02 : Inaya rit avec Meïssa et amies -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_02.png" alt="Inaya rit avec Meïssa et ses amies">
+
+            <div class="sfx" style="top: 20px; right: 20px; color: #F6AE2D; font-size: 28px;">
+                Hahaha !
+            </div>
+
+            <div class="bubble" style="bottom: 50px; left: 15px; max-width: 55%;">
+                Arrête, t'es bête !
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_03 : Inaya et Maya souriantes -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_03.png" alt="Inaya et Maya souriantes dans le bureau">
+
+            <div class="bubble right" style="top: 20px; right: 15px; max-width: 65%;">
+                Tu as fait tellement de progrès, Inaya.
+            </div>
+
+            <div class="bubble" style="bottom: 50px; left: 15px; max-width: 60%;">
+                Grâce à vous. Et à Meïssa.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_04 : Inaya décide de témoigner -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_04.png" alt="Inaya, regard déterminé">
+
+            <div class="bubble right" style="top: 20px; right: 15px; max-width: 75%;">
+                Il y a un atelier de prévention au lycée. Si tu voulais témoigner...
+            </div>
+
+            <div class="bubble" style="bottom: 50px; left: 15px; max-width: 75%;">
+                Je veux le faire. Pour que d'autres ne tombent pas dans le même piège.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_05 : Inaya parle à l'atelier -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_05.png" alt="Inaya témoigne devant un groupe de jeunes">
+
+            <div class="bubble" style="top: 25px; left: 15px; max-width: 65%;">
+                Je vais vous raconter mon histoire...
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_06 : Inaya témoigne close-up puissant -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_06.png" alt="Close-up Inaya qui témoigne avec force">
+
+            <div class="bubble" style="top: 20px; left: 15px; max-width: 70%;">
+                Personne ne mérite ce qui m'est arrivé.
+            </div>
+
+            <div class="bubble right" style="bottom: 50px; right: 15px; max-width: 75%;">
+                Mais surtout... personne ne doit rester seul avec ça.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_07 : Visages élèves touchés -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_07.png" alt="Visages émus des élèves qui écoutent">
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_08 : Inaya regarde le lecteur (4ème mur) -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_08.png" alt="Inaya regarde directement le lecteur">
+
+            <div class="bubble direct" style="top: 20px; left: 15px; max-width: 70%;">
+                Et toi qui lis ça...
+            </div>
+
+            <div class="bubble direct" style="top: 110px; right: 15px; max-width: 75%;">
+                Si tu traverses quelque chose de difficile...
+            </div>
+
+            <div class="bubble direct" style="bottom: 80px; left: 15px; max-width: 65%;">
+                Parle. À quelqu'un. N'importe qui.
+            </div>
+
+            <div class="bubble direct" style="bottom: 20px; right: 15px; max-width: 55%; font-weight: bold;">
+                Tu n'es pas seul(e). ❤️
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_09 : Infographie ressources -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_09.png" alt="Infographie des numéros d'aide">
+        </div>
+
+        <div class="resources-box">
+            <h3>BESOIN D'AIDE ?</h3>
+
+            <div class="resource-item">
+                <span class="icon">📞</span>
+                <div>
+                    <div class="name">PSP Mayotte</div>
+                    <div class="number">Point Services aux Particuliers</div>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <span class="icon">🛡️</span>
+                <div>
+                    <div class="name">3018 — Net Écoute</div>
+                    <div class="number">Cyberharcèlement (gratuit, anonyme)</div>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <span class="icon">🆘</span>
+                <div>
+                    <div class="name">119 — Allô Enfance en Danger</div>
+                    <div class="number">24h/24, 7j/7 (gratuit, anonyme)</div>
+                </div>
+            </div>
+
+            <div class="resource-item">
+                <span class="icon">💬</span>
+                <div>
+                    <div class="name">e-Enfance</div>
+                    <div class="number">www.e-enfance.org</div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_10 : Inaya sourit sur la plage sunset -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_10.png" alt="Inaya sourit sur la plage au coucher de soleil">
+
+            <div class="narrator-box" style="top: 20px; left: 15px; max-width: 75%;">
+                Inaya a retrouvé sa lumière.
+            </div>
+
+            <div class="narrator-box" style="bottom: 20px; right: 15px; max-width: 70%;">
+                Et toi aussi, tu peux la retrouver.
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- 5_11 : Ciel étoilé - FIN -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP5/5_11.png" alt="Ciel étoilé au-dessus de Mayotte">
+            <div class="fin-text">FIN</div>
+        </div>
+
+        <!-- FOOTER FINAL -->
+        <div class="episode-footer">
+            <div class="fin-title">MAECHA VOWVOW</div>
+            <div class="credits">
+                <p>Un webtoon de prévention contre<br>le cyber-harcèlement et l'exploitation en ligne</p>
+                <br>
+                <p><strong>Sirel976 Entreprise</strong><br>Mayotte</p>
+                <br>
+                <p style="font-size: 0.85em; opacity: 0.7;">
+                    Direction artistique : RAYA<br>
+                    Scénario &amp; dialogues : El-Farouk ADINANI<br>
+                    Production : Sirel976 AI Studio
+                </p>
+            </div>
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="episode-nav">
+            <a href="episode_4.html">&larr; Épisode 4</a>
+            <a href="index.html">Accueil</a>
+        </div>
+
+    </div>
+</body>
+</html>

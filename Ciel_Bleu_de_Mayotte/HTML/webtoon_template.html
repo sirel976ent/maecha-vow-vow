@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Le Ciel Bleu de Mayotte - Épisode X</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            background: #1a1a2e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(26,26,46,0.95) 0%, rgba(26,26,46,0) 100%);
+            padding: 15px 20px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .header .episode-info {
+            color: #87ceeb;
+            font-size: 0.9rem;
+        }
+
+        /* ===== WEBTOON CONTAINER ===== */
+        .webtoon-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 60px;
+            padding-bottom: 80px;
+        }
+
+        /* ===== PANEL ===== */
+        .panel {
+            position: relative;
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .panel img {
+            width: 100%;
+            display: block;
+        }
+
+        /* ===== DIALOGUE OVERLAY ===== */
+        .dialogue-overlay {
+            position: absolute;
+            padding: 12px 16px;
+            border-radius: 20px;
+            max-width: 80%;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Dialogue normal (personnage) */
+        .dialogue-overlay.character {
+            background: #fff;
+            color: #333;
+            border: 2px solid #333;
+        }
+
+        /* Pensée (italique) */
+        .dialogue-overlay.thought {
+            background: rgba(255,255,255,0.9);
+            color: #555;
+            font-style: italic;
+            border: 2px dashed #888;
+        }
+
+        /* Narration */
+        .dialogue-overlay.narration {
+            background: rgba(26,26,46,0.85);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        /* Position helpers */
+        .pos-top-left { top: 5%; left: 5%; }
+        .pos-top-center { top: 5%; left: 50%; transform: translateX(-50%); }
+        .pos-top-right { top: 5%; right: 5%; }
+        .pos-middle-left { top: 40%; left: 5%; }
+        .pos-middle-center { top: 40%; left: 50%; transform: translateX(-50%); }
+        .pos-middle-right { top: 40%; right: 5%; }
+        .pos-bottom-left { bottom: 15%; left: 5%; }
+        .pos-bottom-center { bottom: 15%; left: 50%; transform: translateX(-50%); }
+        .pos-bottom-right { bottom: 15%; right: 5%; }
+
+        /* ===== TRANSITION PANEL ===== */
+        .transition-panel {
+            background: linear-gradient(180deg, #1a1a2e 0%, #2d3561 50%, #1a1a2e 100%);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .transition-panel .narration-text {
+            color: #fff;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-style: italic;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ===== EPISODE END ===== */
+        .episode-end {
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .episode-end h2 {
+            color: #87ceeb;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .episode-end .next-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #87ceeb, #4facfe);
+            color: #1a1a2e;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .episode-end .next-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(135,206,235,0.4);
+        }
+
+        /* ===== HELP SECTION ===== */
+        .help-section {
+            background: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 4px solid #87ceeb;
+        }
+
+        .help-section h3 {
+            color: #1a1a2e;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .help-section p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto 20px;
+        }
+
+        .help-section .help-contact {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .help-section .help-contact strong {
+            color: #1a1a2e;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* ===== FOOTER NAV ===== */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26,26,46,0.95);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .footer-nav a {
+            color: #87ceeb;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .footer-nav a:hover {
+            background: rgba(135,206,235,0.2);
+        }
+
+        .footer-nav .progress {
+            color: #fff;
+            font-size: 0.85rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .dialogue-overlay {
+                font-size: 0.85rem;
+                padding: 10px 14px;
+            }
+
+            .header h1 {
+                font-size: 1rem;
+            }
+
+            .transition-panel .narration-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1>Le Ciel Bleu de Mayotte</h1>
+        <span class="episode-info">Épisode 1/5</span>
+    </header>
+
+    <!-- WEBTOON CONTENT -->
+    <main class="webtoon-container">
+
+        <!-- ===== PLANCHE 1_00 - TRANSITION ===== -->
+        <section class="transition-panel">
+            <p class="narration-text">
+                "La mer était sombre, infinie. Et quelque part au-delà des vagues, une nouvelle vie attendait peut-être."
+            </p>
+        </section>
+
+        <!-- ===== PLANCHE 1_01 ===== -->
+        <article class="panel">
+            <img src="IMAGES/EP1/1_01.png" alt="Maria sur le kwassa">
+            <div class="dialogue-overlay narration pos-top-center">
+                Maria avait traversé la mer sombre. Devant elle, une nouvelle terre. Mayotte.
+            </div>
+        </article>
+
+        <!-- ===== PLANCHE 1_02 ===== -->
+        <article class="panel">
+            <img src="IMAGES/EP1/1_02.png" alt="Arrivée sur la plage">
+            <div class="dialogue-overlay narration pos-bottom-center">
+                Ses pieds ont touché le sable. Un nouveau chapitre commençait.
+            </div>
+        </article>
+
+        <!-- ===== PLANCHE 1_03 ===== -->
+        <article class="panel">
+            <img src="IMAGES/EP1/1_03.png" alt="Perdue dans Mamoudzou">
+            <div class="dialogue-overlay narration pos-top-center">
+                La ville était bruyante, pleine de visages inconnus. Maria était seule.
+            </div>
+        </article>
+
+        <!-- ===== PLANCHE 1_04 ===== -->
+        <article class="panel">
+            <img src="IMAGES/EP1/1_04.png" alt="Close-up fatigue">
+            <div class="dialogue-overlay thought pos-bottom-center">
+                "Je n'ai plus rien... Qu'est-ce que je vais faire ?"
+            </div>
+        </article>
+
+        <!-- ===== TEMPLATE DIALOGUE PERSONNAGE ===== -->
+        <!--
+        <article class="panel">
+            <img src="IMAGES/EP1/X_XX.png" alt="Description">
+            <div class="dialogue-overlay character pos-top-left">
+                Dialogue du personnage ici
+            </div>
+        </article>
+        -->
+
+        <!-- ===== FIN ÉPISODE ===== -->
+        <section class="episode-end">
+            <h2>Fin de l'Épisode 1</h2>
+            <a href="episode2.html" class="next-btn">Épisode suivant →</a>
+        </section>
+
+        <!-- ===== SECTION AIDE (optionnel - après EP5) ===== -->
+        <!--
+        <section class="help-section">
+            <h3>Besoin d'aide ?</h3>
+            <p>
+                Cette histoire est fictive, mais les situations qu'elle décrit sont réelles. 
+                Si vous ou quelqu'un que vous connaissez êtes dans une situation difficile, 
+                des professionnels peuvent vous aider.
+            </p>
+            <div class="help-contact">
+                <strong>PSP Mayotte - Parcours de Sortie de Prostitution</strong>
+                Mlezi Maore<br>
+                Numéro : [À COMPLÉTER]
+            </div>
+        </section>
+        -->
+
+    </main>
+
+    <!-- FOOTER NAV -->
+    <nav class="footer-nav">
+        <a href="index.html">← Accueil</a>
+        <span class="progress">4/11</span>
+        <a href="episode2.html">Suivant →</a>
+    </nav>
+
+</body>
+</html>

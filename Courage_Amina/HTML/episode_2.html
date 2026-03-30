@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Le Courage d'Amina — Épisode 2 : Les Promesses de David</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: #1a1a2e; font-family: 'Nunito', sans-serif; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+
+        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: linear-gradient(180deg, rgba(26,26,46,0.98) 0%, rgba(26,26,46,0.8) 100%); backdrop-filter: blur(10px); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(232,180,188,0.2); }
+        .header-title { font-size: 1rem; font-weight: 700; color: #e8b4bc; }
+        .header-episode { font-size: 0.85rem; color: #a0a0a0; }
+        .back-btn { background: none; border: none; color: #e8b4bc; font-size: 1.5rem; cursor: pointer; padding: 5px; text-decoration: none; }
+
+        .webtoon-container { width: 100%; max-width: 450px; background: #0d0d1a; padding-top: 60px; }
+
+        .episode-header { background: linear-gradient(135deg, #2a1a2e, #1a1a2e); padding: 30px 20px; text-align: center; color: white; border-bottom: 2px solid rgba(232,180,188,0.3); }
+        .episode-header .series-name { font-size: 0.8em; color: #e8b4bc; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; opacity: 0.9; }
+        .episode-header h1 { font-size: 1.6em; font-weight: 700; letter-spacing: 2px; color: #e8b4bc; }
+        .episode-header h2 { font-size: 1em; font-weight: normal; margin-top: 5px; opacity: 0.8; }
+
+        .panel { position: relative; width: 100%; overflow: hidden; }
+        .panel img { width: 100%; height: auto; display: block; }
+
+        .bubble {
+            position: absolute;
+            background: white; border: 2.5px solid #111;
+            border-radius: 18px; padding: 9px 13px;
+            font-size: 13px; line-height: 1.45;
+            max-width: 62%;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        .bubble.tl::after { content:''; position:absolute; bottom:-13px; left:22px; border-width:13px 9px 0; border-style:solid; border-color:white transparent transparent; }
+        .bubble.tl::before { content:''; position:absolute; bottom:-17px; left:20px; border-width:16px 11px 0; border-style:solid; border-color:#111 transparent transparent; }
+        .bubble.tr::after { content:''; position:absolute; bottom:-13px; right:22px; border-width:13px 9px 0; border-style:solid; border-color:white transparent transparent; }
+        .bubble.tr::before { content:''; position:absolute; bottom:-17px; right:20px; border-width:16px 11px 0; border-style:solid; border-color:#111 transparent transparent; }
+        .bubble.bl::after { content:''; position:absolute; top:-13px; left:22px; border-width:0 9px 13px; border-style:solid; border-color:transparent transparent white; }
+        .bubble.bl::before { content:''; position:absolute; top:-17px; left:20px; border-width:0 11px 16px; border-style:solid; border-color:transparent transparent #111; }
+        .bubble.br::after { content:''; position:absolute; top:-13px; right:22px; border-width:0 9px 13px; border-style:solid; border-color:transparent transparent white; }
+        .bubble.br::before { content:''; position:absolute; top:-17px; right:20px; border-width:0 11px 16px; border-style:solid; border-color:transparent transparent #111; }
+
+        .bubble.thought { border-style: dashed; font-style: italic; background: #fff8fa; border-color: #c8849a; color: #5a2a3a; }
+        .bubble.thought::after, .bubble.thought::before { display: none; }
+        .bubble.thought .dots { position: absolute; bottom: -26px; left: 16px; }
+        .bubble.thought .dots span { display: inline-block; width: 7px; height: 7px; background: #fff8fa; border: 2px dashed #c8849a; border-radius: 50%; margin-right: 3px; }
+        .bubble.thought .dots span:first-child { width: 10px; height: 10px; }
+
+        .narr {
+            background: rgba(26, 10, 20, 0.88);
+            border-left: 3px solid #e8b4bc;
+            padding: 9px 13px; font-style: italic;
+            font-size: 12px; color: #f0d0d8; line-height: 1.55;
+            width: calc(100% - 28px); margin: 0 14px;
+            position: absolute;
+            z-index: 10;
+        }
+
+        /* Sound effects */
+        .sfx {
+            position: absolute; font-family: 'Bangers', cursive; font-size: 24px;
+            color: #c8849a; text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff;
+            transform: rotate(-5deg);
+        }
+
+        .panel-separator { height: 5px; background: #1a1a2e; }
+
+        .episode-footer { background: linear-gradient(135deg, #1a1a2e, #2a1a2e); padding: 30px 20px; text-align: center; color: white; border-top: 2px solid rgba(232,180,188,0.2); }
+        .to-be-continued { font-size: 1.6em; font-weight: 700; color: #e8b4bc; letter-spacing: 3px; }
+
+        .episode-nav { display: flex; justify-content: space-between; padding: 10px 20px; background: #0d0d1a; border-top: 1px solid #2a1a2e; }
+        .episode-nav a { color: #e8b4bc; text-decoration: none; font-size: 14px; }
+
+        .scroll-top { position: fixed; bottom: 20px; right: 20px; background: #e8b4bc; color: #1a1a2e; width: 45px; height: 45px; border-radius: 50%; border: none; cursor: pointer; font-size: 1.2rem; display: none; align-items: center; justify-content: center; box-shadow: 0 3px 15px rgba(0,0,0,0.4); z-index: 99; }
+        .scroll-top.visible { display: flex; }
+
+        @media (max-width: 450px) { .bubble { font-size: 12px; padding: 8px 11px; } .narr { font-size: 11px; } }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="back-btn">←</a>
+        <div>
+            <div class="header-title">Le Courage d'Amina</div>
+            <div class="header-episode">Épisode 2</div>
+        </div>
+        <div style="width:30px;"></div>
+    </header>
+
+    <div class="webtoon-container">
+
+        <div class="episode-header">
+            <div class="series-name">Le Courage d'Amina</div>
+            <h1>ÉPISODE 2</h1>
+            <h2>Les Promesses de David</h2>
+        </div>
+
+        <!-- 2_00 — Le marché de Mamoudzou -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_00.png" alt="Le marché de Mamoudzou">
+            <div class="narr" style="bottom: 18px;">
+                "Un jour ordinaire. Un marché comme tant d'autres. Pourtant, ce jour-là, quelque chose allait changer."
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 2_01 — Amina au marché -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_01.png" alt="Amina au marché">
+            <div class="narr" style="top: 14px;">
+                "Amina passait souvent par le marché en rentrant du lycée."
+            </div>
+            <div class="bubble thought" style="bottom: 50px; right: 14px; max-width: 58%;">
+                Si seulement je pouvais rapporter quelque chose ce soir...
+                <div class="dots"><span></span><span></span></div>
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 2_02 — David apparaît -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_02.png" alt="David apparaît">
+            <div class="narr" style="top: 14px;">
+                "Ce jour-là, quelqu'un l'a remarquée."
+            </div>
+            <div class="bubble tl" style="bottom: 45px; left: 14px; max-width: 60%;">
+                Excusez-moi, mademoiselle...
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 2_03 — Conversation -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_03.png" alt="Conversation avec David">
+            <div class="bubble tl" style="top: 18px; left: 14px; max-width: 58%;">
+                Tu as l'air sérieuse, toi. Tu sais... parfois, il suffit d'un petit coup de pouce.
+            </div>
+            <div class="bubble tr" style="bottom: 50px; right: 14px; max-width: 50%;">
+                Pardon ? Je ne comprends pas...
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 2_04 — Les flatteries -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_04.png" alt="Les flatteries de David">
+            <div class="bubble tl" style="top: 18px; left: 14px; max-width: 62%;">
+                Je vois que tu es une fille bien. Sérieuse, intelligente. Tu mérites mieux que les difficultés, non ?
+            </div>
+            <div class="bubble thought" style="bottom: 50px; right: 14px; max-width: 52%;">
+                Pourquoi cet homme me parle comme ça...
+                <div class="dots"><span></span><span></span></div>
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 2_05 — La promesse -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_05.png" alt="La promesse de David">
+            <div class="bubble tl" style="top: 18px; left: 14px; max-width: 60%;">
+                Écoute, je connais des gens. Je pourrais peut-être t'aider. Un petit travail, un peu d'argent. Rien de compliqué.
+            </div>
+            <div class="bubble tr" style="bottom: 50px; right: 14px; max-width: 40%;">
+                De l'argent ?
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 2_06 — L'échange du numéro -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_06.png" alt="L'échange du numéro">
+            <div class="bubble tl" style="bottom: 45px; left: 14px; max-width: 65%;">
+                Tiens, voilà mon numéro. Appelle-moi si tu veux qu'on en parle. Pas de pression. C'est toi qui décides.
+            </div>
+            <div class="sfx" style="top: 18px; right: 14px; font-size: 17px; color: #d4a0b0; transform: rotate(4deg);">frrr...</div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 2_07 — Amina troublée -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_07.png" alt="Amina troublée">
+            <div class="bubble thought" style="top: 20px; left: 14px; max-width: 68%;">
+                De l'argent pour aider maman... Ce n'était peut-être pas une mauvaise idée...
+                <div class="dots"><span></span><span></span></div>
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 2_08 — Le soir, hésitation -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_08.png" alt="Amina le soir, hésitante">
+            <div class="narr" style="top: 14px;">
+                "Ce soir-là, Amina a regardé le numéro longtemps. Elle pensait à sa mère, aux difficultés, aux rêves."
+            </div>
+            <div class="bubble thought" style="bottom: 50px; right: 14px; max-width: 58%;">
+                Il a l'air sérieux... Mais est-ce que je peux lui faire confiance ?
+                <div class="dots"><span></span><span></span></div>
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 2_09 — L'appel -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_09.png" alt="Amina passe l'appel">
+            <div class="narr" style="top: 14px;">
+                "Elle a fini par appeler."
+            </div>
+            <div class="bubble bl" style="bottom: 45px; left: 14px; max-width: 65%;">
+                Ah, je savais que tu étais intelligente. On se voit demain ?
+            </div>
+            <div class="sfx" style="top: 42%; right: 14px; font-size: 22px; color: #c8849a; transform: rotate(-6deg);">RING...</div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- 2_10 — La nuit, présage -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_10.png" alt="La nuit tombe — présage">
+            <div class="narr" style="bottom: 18px;">
+                "Ce n'était que quelques mots. Pourtant, ils sont restés dans sa tête. Comme une promesse... ou un piège qui se referme doucement."
+            </div>
+        </div>
+
+        <div class="episode-footer">
+            <div class="to-be-continued">À SUIVRE...</div>
+            <p style="margin-top: 12px; opacity: 0.7; font-size: 0.9em;">Épisode 3 : Le Piège du Silence</p>
+        </div>
+
+        <div class="episode-nav">
+            <a href="episode_1.html">← Épisode 1</a>
+            <a href="index.html">Tous les épisodes</a>
+            <a href="episode_3.html">Épisode 3 →</a>
+        </div>
+
+    </div>
+
+    <button class="scroll-top" id="scrollTop">↑</button>
+    <script>
+        const scrollBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => { scrollBtn.classList.toggle('visible', window.scrollY > 500); });
+        scrollBtn.addEventListener('click', () => { window.scrollTo({top:0,behavior:'smooth'}); });
+    </script>
+</body>
+</html>

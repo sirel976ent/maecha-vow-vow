@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Ciel Bleu de Mayotte - Épisode 4 : La Main Tendue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a1628;
+            font-family: 'Comic Neue', cursive;
+            display: flex;
+            justify-content: center;
+        }
+
+        .webtoon-container { width: 100%; max-width: 450px; background: #000; }
+
+        .episode-header {
+            background: linear-gradient(135deg, #1a5a7a, #0a1628);
+            padding: 20px; text-align: center; color: white;
+        }
+        .episode-header .series-name {
+            font-size: 0.8em; color: #4aa8c8; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 6px; opacity: 0.9;
+        }
+        .episode-header h1 {
+            font-family: 'Bangers', cursive; font-size: 1.8em;
+            letter-spacing: 2px; color: #4aa8c8;
+        }
+        .episode-header h2 { font-size: 1.1em; font-weight: normal; margin-top: 5px; opacity: 0.9; }
+
+        .panel { position: relative; width: 100%; overflow: hidden; }
+        .panel img { width: 100%; height: auto; display: block; }
+
+        /* Dialogue bubble — tail bottom-left by default */
+        .bubble {
+            position: absolute;
+            background: rgba(255,255,255,0.82); border: 2.5px solid #111;
+            border-radius: 18px; padding: 9px 13px;
+            font-size: 13px; line-height: 1.45;
+            max-width: 62%;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.25);
+        }
+        /* tail pointing down-left */
+        .bubble.tl::after {
+            content: ''; position: absolute; bottom: -13px; left: 22px;
+            border-width: 13px 9px 0; border-style: solid;
+            border-color: rgba(255,255,255,0.82) transparent transparent;
+        }
+        .bubble.tl::before {
+            content: ''; position: absolute; bottom: -17px; left: 20px;
+            border-width: 16px 11px 0; border-style: solid;
+            border-color: #111 transparent transparent;
+        }
+        /* tail pointing down-right */
+        .bubble.tr::after {
+            content: ''; position: absolute; bottom: -13px; right: 22px;
+            border-width: 13px 9px 0; border-style: solid;
+            border-color: rgba(255,255,255,0.82) transparent transparent;
+        }
+        .bubble.tr::before {
+            content: ''; position: absolute; bottom: -17px; right: 20px;
+            border-width: 16px 11px 0; border-style: solid;
+            border-color: #111 transparent transparent;
+        }
+        /* tail pointing up-left */
+        .bubble.bl::after {
+            content: ''; position: absolute; top: -13px; left: 22px;
+            border-width: 0 9px 13px; border-style: solid;
+            border-color: transparent transparent rgba(255,255,255,0.82);
+        }
+        .bubble.bl::before {
+            content: ''; position: absolute; top: -17px; left: 20px;
+            border-width: 0 11px 16px; border-style: solid;
+            border-color: transparent transparent #111;
+        }
+
+        /* tail pointing up-right */
+        .bubble.br::after {
+            content: ''; position: absolute; top: -13px; right: 22px;
+            border-width: 0 9px 13px; border-style: solid;
+            border-color: transparent transparent rgba(255,255,255,0.82);
+        }
+        .bubble.br::before {
+            content: ''; position: absolute; top: -17px; right: 20px;
+            border-width: 0 11px 16px; border-style: solid;
+            border-color: transparent transparent #111;
+        }
+
+        /* Thought bubble */
+        .bubble.thought {
+            border-style: dashed; font-style: italic;
+            background: rgba(246,246,255,0.82); border-color: #555;
+        }
+        .bubble.thought::after, .bubble.thought::before { display: none; }
+        .bubble.thought .dots { position: absolute; bottom: -26px; left: 16px; }
+        .bubble.thought .dots span {
+            display: inline-block; width: 7px; height: 7px;
+            background: rgba(246,246,255,0.82); border: 2px dashed #555;
+            border-radius: 50%; margin-right: 3px;
+        }
+        .bubble.thought .dots span:first-child { width: 10px; height: 10px; }
+
+        /* Narrator box */
+        .narr {
+            background: rgba(8, 18, 35, 0.88);
+            border-left: 3px solid #4aa8c8;
+            padding: 9px 13px; font-style: italic;
+            font-size: 12px; color: #c0dff0; line-height: 1.55;
+            width: calc(100% - 28px); margin: 0 14px;
+            position: absolute;
+        }
+
+        /* Sound effects */
+        .sfx {
+            position: absolute; font-family: 'Bangers', cursive; font-size: 24px;
+            color: #4aa8d8; text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff;
+            transform: rotate(-5deg);
+        }
+
+        .panel-separator { height: 5px; background: #0a1628; }
+
+        .episode-footer {
+            background: linear-gradient(135deg, #0a1628, #1a5a7a);
+            padding: 30px 20px; text-align: center; color: white;
+        }
+        .episode-footer .to-be-continued {
+            font-family: 'Bangers', cursive; font-size: 2em;
+            color: #4aa8c8; letter-spacing: 3px;
+        }
+
+        .episode-nav {
+            display: flex; justify-content: space-between;
+            padding: 10px 20px; background: #070f1a;
+            border-top: 1px solid #1a3a5a;
+        }
+        .episode-nav a { color: #4aa8c8; text-decoration: none; font-size: 14px; }
+        .episode-nav .off { color: #1e3a52; font-size: 14px; }
+
+        @media (max-width: 450px) {
+            .bubble { font-size: 12px; padding: 8px 11px; }
+            .narr { font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+<div class="webtoon-container">
+
+    <div class="episode-header">
+        <div class="series-name">Le Ciel Bleu de Mayotte</div>
+        <h1>ÉPISODE 4</h1>
+        <h2>La Main Tendue</h2>
+    </div>
+
+    <!-- ——— 4_00 ——— Plan d'ensemble marché (pas de personnage) -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_00.png" alt="Le marché de Mamoudzou, une matinée ordinaire">
+        <div class="narr" style="bottom: 18px;">
+            "Le marché de Mamoudzou. Trois semaines après. Pour moi, le temps n'existait plus vraiment. On m'emmenait. On me ramenait. Je flottais."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 4_01 ——— Maria mécanique au marché, observée -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_01.png" alt="Maria mécanique au marché, regard perdu">
+        <div class="narr" style="top: 14px;">
+            "J'avais appris à faire semblant d'exister. Yeux baissés. Pas automatiques. Ne rien ressentir."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 4_02 ——— Aïcha observe depuis son étal -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_02.png" alt="Aïcha observe Maria depuis son étal">
+        <div class="narr" style="top: 14px;">
+            "Je ne savais pas qu'elle m'avait remarquée aussi. Une femme qui regardait sans détourner les yeux. Pas de pitié. Juste... de la présence."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 4_03 ——— Aïcha glisse le papier à Maria -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_03.png" alt="Aïcha glisse discrètement un papier à Maria dans la foule">
+        <div class="narr" style="top: 14px;">
+            "Cinq secondes. Un geste invisible dans la foule. Un papier plié dans ma paume."
+        </div>
+        <div class="bubble tr" style="top: 38%; left: 14px; max-width: 58%; font-size: 12px;">
+            Appelle ce numéro. N'attends pas.
+        </div>
+        <div class="sfx" style="bottom: 18px; left: 18px; font-size: 14px; color: #3a8aaa; transform: rotate(-3deg);">frtch</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 4_04 ——— Close-up main avec le papier (pas de visage) -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_04.png" alt="Gros plan : main de Maria tenant le papier plié">
+        <div class="narr" style="bottom: 18px;">
+            "'Aide aux jeunes — PSP Mayotte.' Je ne savais pas ce que c'était. Mais le mot 'aide'... je l'avais presque oublié."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 4_05 ——— Maria cache le papier, regard circulaire -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_05.png" alt="Maria cache le papier et vérifie autour d'elle">
+        <div class="bubble thought" style="bottom: 50px; left: 14px; max-width: 62%;">
+            Elle sait quelque chose... Comment ? Est-ce que ça peut être vrai ?
+            <div class="dots"><span></span><span></span></div>
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 4_06 ——— Maria la nuit avec lueur de téléphone -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_06.png" alt="Maria dans l'obscurité, visage éclairé par son téléphone">
+        <div class="narr" style="top: 14px;">
+            "Minuit. J'ai composé le numéro trois fois. Raccroché deux fois. À la troisième, j'ai laissé sonner."
+        </div>
+        <div class="bubble thought" style="bottom: 44px; left: 14px; max-width: 58%; font-size: 12px;">
+            Si quelqu'un m'entend... si les filles se réveillent...
+            <div class="dots"><span></span><span></span></div>
+        </div>
+        <div class="sfx" style="top: 62px; right: 18px; font-size: 18px; transform: rotate(-3deg);">BZZZ BZZZ</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 4_07 ——— Maria pleure en téléphonant -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_07.png" alt="Maria en pleurs, téléphone à l'oreille, dit la vérité">
+        <div class="narr" style="top: 14px;">
+            "Et puis j'ai parlé. La vérité entière. Pour la première fois depuis des semaines, j'ai dit la vérité."
+        </div>
+        <div class="bubble thought" style="top: 36%; right: 14px; max-width: 55%; font-size: 12px;">
+            Je ne sais pas par où commencer...
+            <div class="dots"><span></span><span></span></div>
+        </div>
+        <div class="bubble tl" style="top: 60%; right: 14px; max-width: 60%;">
+            Je... je ne sais pas comment expliquer... on me force à...
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 4_08 ——— Maria soulagée, yeux fermés -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_08.png" alt="Maria soulagée, yeux fermés, écoute la voix calme">
+        <div class="narr" style="top: 14px;">
+            "La voix à l'autre bout était calme. Elle n'a pas crié. Elle n'a pas jugé. Elle a dit : 'Je t'entends.'"
+        </div>
+        <div class="bubble tl" style="top: 60%; right: 14px; max-width: 55%;">
+            Demain matin ? Oui... oui, je serai là.
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 4_09 ——— Sauvetage : Aïcha + Ben + Maria marchent ensemble -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_09.png" alt="Aïcha, Ben et Maria marchent côte à côte vers l'espoir">
+        <div class="narr" style="top: 14px;">
+            "Le lendemain matin, ils étaient là. Aïcha et un collègue. Pour la première fois depuis longtemps, je marchais sans regarder derrière moi."
+        </div>
+        <div class="sfx" style="bottom: 18px; left: 50%; transform: translateX(-50%) rotate(-4deg); font-size: 16px;">TAP TAP TAP</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 4_10 ——— Visage de Maria levé vers le ciel bleu -->
+    <div class="panel">
+        <img src="../IMAGES/EP4/4_10.png" alt="Maria lève le visage vers le ciel bleu de Mayotte">
+        <div class="narr" style="bottom: 18px;">
+            "Le ciel bleu de Mayotte. J'avais presque oublié qu'il existait. J'avais presque oublié que j'existais."
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="episode-footer">
+        <div class="to-be-continued">À SUIVRE...</div>
+        <p style="margin-top: 12px; opacity: 0.8; font-size: 0.9em;">Épisode 5 : Renaître</p>
+    </div>
+
+    <div class="episode-nav">
+        <a href="episode_3.html">← Épisode 3</a>
+        <a href="episode_5.html">Épisode 5 →</a>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sirel976 Webtoons — Mayotte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #1a1a2e;
+            font-family: 'Comic Neue', cursive;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%; max-width: 450px; background: #000;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 30px 20px;
+        }
+        .logo {
+            font-family: 'Bangers', cursive; font-size: 1em;
+            color: #555; letter-spacing: 4px; text-align: center;
+            margin-bottom: 8px; text-transform: uppercase;
+        }
+        h1 {
+            font-family: 'Bangers', cursive; font-size: 2.8em;
+            color: #F6AE2D; letter-spacing: 3px; text-align: center;
+            margin-bottom: 5px; line-height: 1.1;
+        }
+        .subtitle {
+            color: #aaa; font-size: 0.9em; text-align: center;
+            margin-bottom: 35px; line-height: 1.5;
+        }
+        .section-label {
+            width: 100%; color: #555; font-size: 0.75em;
+            letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 15px; padding-bottom: 8px;
+            border-bottom: 1px solid #222;
+        }
+        .series-card {
+            width: 100%;
+            background: linear-gradient(135deg, #1a1a2e, #2E86AB);
+            border-radius: 15px; margin-bottom: 20px;
+            overflow: hidden; text-decoration: none; color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block; position: relative;
+        }
+        .series-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(46,134,171,0.5);
+        }
+        .series-card.locked {
+            opacity: 0.5; pointer-events: none;
+            background: linear-gradient(135deg, #111, #1a2a2a);
+        }
+        .series-card .cover {
+            width: 100%; height: 180px; object-fit: cover;
+            object-position: top;
+            display: block;
+        }
+        .cover-placeholder {
+            width: 100%; height: 180px;
+            background: linear-gradient(160deg, #0a2a3a 0%, #051520 50%, #0f2a1a 100%);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 10px;
+        }
+        .cover-placeholder .sky-icon {
+            font-size: 3em; opacity: 0.4;
+        }
+        .cover-placeholder .coming-text {
+            color: #446; font-size: 0.85em; letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .series-card .info {
+            padding: 16px 18px;
+        }
+        .series-title {
+            font-family: 'Bangers', cursive; font-size: 1.6em;
+            color: #F6AE2D; letter-spacing: 2px; margin-bottom: 4px;
+        }
+        .series-desc {
+            font-size: 0.88em; color: #ccc; margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .series-meta {
+            font-size: 0.78em; color: #888;
+            margin-bottom: 10px;
+        }
+        .badge {
+            display: inline-block; background: #F6AE2D; color: #000;
+            font-size: 0.68em; font-weight: bold; padding: 3px 10px;
+            border-radius: 10px; letter-spacing: 1px;
+        }
+        .badge.coming { background: #1e3a4a; color: #4a8fa8; border: 1px solid #2a5a70; }
+        .badge.new { background: #2a6e2a; color: #7ef07e; }
+        .divider {
+            width: 100%; height: 1px; background: #111;
+            margin: 10px 0 25px;
+        }
+        .footer-text {
+            color: #333; font-size: 0.75em; text-align: center;
+            margin-top: 30px; line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="logo">Sirel976 Entreprise</div>
+        <h1>WEBTOONS<br>MAYOTTE</h1>
+        <div class="subtitle">Bandes dessinées numériques<br>pour et depuis Mayotte</div>
+
+        <div class="section-label">Nos séries</div>
+
+        <!-- Maecha VowVow -->
+        <a class="series-card" href="HTML/index.html">
+            <img class="cover" src="IMAGES/EP1/1_00.png" alt="Maecha VowVow">
+            <div class="info">
+                <div class="series-title">MAECHA VOWVOW</div>
+                <div class="series-desc">Prévention contre le cyber-harcèlement et l'exploitation en ligne à Mayotte</div>
+                <div class="series-meta">5 épisodes &nbsp;•&nbsp; 57 planches</div>
+                <span class="badge new">COMPLET</span>
+            </div>
+        </a>
+
+        <!-- Ciel Bleu de Mayotte -->
+        <a class="series-card" href="Ciel_Bleu_de_Mayotte/HTML/index.html">
+            <div class="cover-placeholder">
+                <div class="sky-icon">🌊</div>
+                <div class="coming-text">En production</div>
+            </div>
+            <div class="info">
+                <div class="series-title">CIEL BLEU DE MAYOTTE</div>
+                <div class="series-desc">Sensibilisation à l'exploitation sexuelle — PSP Mayotte</div>
+                <div class="series-meta">5 épisodes &nbsp;•&nbsp; 57 planches</div>
+                <span class="badge coming">EN PROD.</span>
+            </div>
+        </a>
+
+        <!-- Le Courage d'Amina -->
+        <a class="series-card" href="Courage_Amina/HTML/index.html">
+            <div class="cover-placeholder">
+                <div class="sky-icon">💗</div>
+                <div class="coming-text">En production</div>
+            </div>
+            <div class="info">
+                <div class="series-title">LE COURAGE D'AMINA</div>
+                <div class="series-desc">Manipulation, emprise et reconstruction — PSP Mayotte</div>
+                <div class="series-meta">5 épisodes &nbsp;•&nbsp; 56 planches</div>
+                <span class="badge coming">EN PROD.</span>
+            </div>
+        </a>
+
+        <div class="footer-text">
+            Sirel976 Entreprise — Mayotte<br>
+            Productions numériques &amp; innovation locale
+        </div>
+
+    </div>
+</body>
+</html>

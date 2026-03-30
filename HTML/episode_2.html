@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maecha VowVow - Épisode 2 : L'Engrenage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #1a1a2e;
+            font-family: 'Comic Neue', cursive;
+            display: flex;
+            justify-content: center;
+        }
+
+        .webtoon-container { width: 100%; max-width: 450px; background: #000; }
+
+        /* HEADER */
+        .episode-header {
+            background: linear-gradient(135deg, #2E86AB, #1a1a2e);
+            padding: 20px; text-align: center; color: white;
+        }
+        .episode-header h1 {
+            font-family: 'Bangers', cursive; font-size: 2em;
+            letter-spacing: 2px; color: #F6AE2D;
+        }
+        .episode-header h2 { font-size: 1.2em; font-weight: normal; margin-top: 5px; opacity: 0.9; }
+
+        /* PANELS */
+        .panel { position: relative; width: 100%; overflow: hidden; }
+        .panel img { width: 100%; height: auto; display: block; }
+
+        /* BULLES DIALOGUE */
+        .bubble {
+            position: absolute; background: white; border: 3px solid #000;
+            border-radius: 20px; padding: 12px 16px; font-size: 14px;
+            line-height: 1.4; max-width: 70%;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        .bubble::after {
+            content: ''; position: absolute; bottom: -15px; left: 30px;
+            border-width: 15px 10px 0; border-style: solid;
+            border-color: white transparent transparent;
+        }
+        .bubble::before {
+            content: ''; position: absolute; bottom: -20px; left: 28px;
+            border-width: 18px 12px 0; border-style: solid;
+            border-color: #000 transparent transparent;
+        }
+        .bubble.right::after { left: auto; right: 30px; }
+        .bubble.right::before { left: auto; right: 28px; }
+
+        /* BULLES PENSEE */
+        .bubble.thought { border-radius: 50%; font-style: italic; background: #f8f8f8; }
+        .bubble.thought::after, .bubble.thought::before { display: none; }
+        .bubble.thought .thought-dots { position: absolute; bottom: -25px; left: 20px; }
+        .bubble.thought .thought-dots span {
+            display: inline-block; background: #f8f8f8;
+            border: 2px solid #000; border-radius: 50%; margin: 0 2px;
+        }
+        .bubble.thought .thought-dots span:nth-child(1) { width: 12px; height: 12px; }
+        .bubble.thought .thought-dots span:nth-child(2) { width: 8px; height: 8px; }
+
+        /* NARRATEUR */
+        .narrator-box {
+            position: absolute; background: #FFF8E7; border: 2px solid #8B7355;
+            padding: 10px 15px; font-style: italic; font-size: 13px;
+            max-width: 80%; box-shadow: 2px 2px 0 rgba(0,0,0,0.2); color: #333;
+        }
+
+        /* SFX */
+        .sfx {
+            position: absolute; font-family: 'Bangers', cursive; font-size: 24px;
+            color: #FF6B35; text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff;
+            transform: rotate(-5deg);
+        }
+
+        /* NOTIFICATION */
+        .notification {
+            position: absolute; background: linear-gradient(135deg, #5865F2, #7289DA);
+            color: white; border-radius: 12px; padding: 8px 12px;
+            font-size: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* MESSAGE MENACANT */
+        .message-sinister {
+            position: absolute; background: rgba(0,0,0,0.85);
+            color: #ff4444; border: 2px solid #ff4444; border-radius: 12px;
+            padding: 10px 14px; font-size: 13px; font-weight: bold;
+            box-shadow: 0 0 15px rgba(255,68,68,0.3);
+        }
+
+        /* TRANSITION */
+        .transition-text {
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            color: white; font-family: 'Bangers', cursive; font-size: 1.4em;
+            letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            text-align: center; width: 90%;
+        }
+
+        /* SEPARATEUR */
+        .panel-separator { height: 5px; background: #1a1a2e; }
+
+        /* FOOTER */
+        .episode-footer {
+            background: linear-gradient(135deg, #1a1a2e, #2E86AB);
+            padding: 30px 20px; text-align: center; color: white;
+        }
+        .episode-footer .to-be-continued {
+            font-family: 'Bangers', cursive; font-size: 2em;
+            color: #F6AE2D; letter-spacing: 3px;
+        }
+        .episode-footer a {
+            color: #F6AE2D; text-decoration: none; font-size: 0.9em;
+        }
+
+        /* NAV */
+        .episode-nav {
+            display: flex; justify-content: space-between; padding: 10px 20px;
+            background: #111; border-top: 1px solid #333;
+        }
+        .episode-nav a {
+            color: #7289DA; text-decoration: none; font-size: 14px;
+        }
+
+        @media (max-width: 450px) {
+            .bubble { font-size: 12px; padding: 10px 12px; }
+            .sfx { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="webtoon-container">
+
+        <!-- HEADER -->
+        <div class="episode-header">
+            <h1>MAECHA VOWVOW</h1>
+            <h2>Épisode 2 : L'Engrenage</h2>
+        </div>
+
+        <!-- ================================================ -->
+        <!-- PLANCHE 2_00 : Transition ouverture - Quartier matin -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_00.png" alt="Rue du quartier le matin, manguiers, enfants">
+            <div class="narrator-box" style="top: 15px; left: 15px;">
+                Quelques semaines plus tard...
+            </div>
+        </div>
+
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- PLANCHE 2_01 : Inaya heureuse notifications -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_01.png" alt="Inaya sur le lit, excitée par les notifications">
+
+            <div class="bubble thought" style="top: 20px; left: 15px; max-width: 55%;">
+                500 abonnés !
+                <div class="thought-dots">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="notification" style="bottom: 60px; right: 15px;">
+                <span>💰</span> +150€ reçus
+            </div>
+        </div>
+
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- PLANCHE 2_02 : Inaya choquée argent -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_02.png" alt="Inaya choquée par le montant reçu">
+
+            <div class="bubble thought" style="top: 25px; right: 15px; max-width: 65%;">
+                Tout ça... pour quelques photos ?!
+                <div class="thought-dots" style="left: auto; right: 20px;">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="sfx" style="bottom: 40px; left: 50%; transform: translateX(-50%) rotate(-3deg); font-size: 32px; color: #FF4444;">
+                😱
+            </div>
+        </div>
+
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- PLANCHE 2_03 : Inaya donne argent à sa mère -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_03.png" alt="Inaya donne de l'argent à sa mère dans la cuisine">
+
+            <div class="bubble right" style="top: 15px; right: 15px; max-width: 60%;">
+                Tiens maman, pour les courses...
+            </div>
+
+            <div class="bubble" style="bottom: 130px; left: 15px; max-width: 60%;">
+                D'où ça vient cet argent ?!
+            </div>
+
+            <div class="bubble right" style="bottom: 40px; right: 15px; max-width: 60%;">
+                Du... du baby-sitting chez les voisins.
+            </div>
+        </div>
+
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- PLANCHE 2_04 : Inaya mal à l'aise -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_04.png" alt="Inaya mal à l'aise devant son téléphone">
+
+            <div class="notification" style="top: 20px; right: 15px;">
+                <span>📱</span> @Ylan_97 t'a envoyé un message
+            </div>
+
+            <div class="message-sinister" style="top: 70px; left: 15px; max-width: 75%;">
+                "T'es trop belle 😍 Je paie bien pour des photos plus... privées"
+            </div>
+
+            <div class="bubble thought" style="bottom: 50px; right: 15px; max-width: 55%;">
+                C'est quoi ce délire...
+                <div class="thought-dots" style="left: auto; right: 20px;">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- PLANCHE 2_05 : Écran messages pression -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_05.png" alt="Écran de téléphone avec messages menaçants">
+        </div>
+
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- PLANCHE 2_06 : Inaya dans le noir, conflicted -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_06.png" alt="Inaya dans le noir éclairée par son téléphone">
+
+            <div class="bubble thought" style="top: 25px; left: 15px; max-width: 65%;">
+                200€... Maman pourrait payer l'électricité...
+                <div class="thought-dots">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="bubble thought" style="bottom: 50px; right: 15px; max-width: 50%;">
+                Juste une fois...
+                <div class="thought-dots" style="left: auto; right: 20px;">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- PLANCHE 2_07 : Mains envoi message -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_07.png" alt="Mains d'Inaya appuyant sur envoyer">
+
+            <div class="sfx" style="bottom: 40px; right: 30px; font-size: 28px; color: #5865F2;">
+                ENVOYÉ ✓
+            </div>
+        </div>
+
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- ECRAN NOIR : Message de prévention -->
+        <!-- ================================================ -->
+        <div style="background: #000; padding: 60px 25px; text-align: center;">
+            <div style="color: #F6AE2D; font-family: 'Bangers', cursive; font-size: 1.6em; letter-spacing: 2px; margin-bottom: 25px;">
+                ⚠️ PAUSE
+            </div>
+            <p style="color: #ccc; font-size: 15px; line-height: 1.8; max-width: 380px; margin: 0 auto;">
+                Inaya venait d'envoyer une photo intime et se retrouva submergée par les regrets...
+            </p>
+            <p style="color: white; font-size: 16px; line-height: 1.8; max-width: 380px; margin: 20px auto; font-weight: bold;">
+                Ce simple geste — appuyer sur « Envoyer » — allait bouleverser sa vie.
+            </p>
+            <p style="color: #F6AE2D; font-size: 15px; line-height: 1.8; max-width: 380px; margin: 20px auto; font-style: italic;">
+                Réfléchis-y à deux fois avant d'envoyer.
+            </p>
+            <div style="width: 60px; height: 2px; background: #F6AE2D; margin: 30px auto;"></div>
+            <p style="color: #888; font-size: 13px; margin-top: 10px;">
+                Continuons notre histoire...
+            </p>
+        </div>
+
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- PLANCHE 2_08 : Inaya seule, regret -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_08.png" alt="Inaya assise seule sur le lit, en larmes">
+
+            <div class="bubble thought" style="top: 25px; left: 15px; max-width: 60%;">
+                Qu'est-ce que j'ai fait...
+                <div class="thought-dots">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="notification" style="bottom: 50px; right: 15px;">
+                <span>💰</span> 200€ reçus
+            </div>
+        </div>
+
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
+        <!-- PLANCHE 2_09 : Transition fin - Nuit -->
+        <!-- ================================================ -->
+        <div class="panel">
+            <img src="../IMAGES/EP2/2_09.png" alt="Banga isolé la nuit sous les étoiles">
+        </div>
+
+        <!-- FOOTER -->
+        <div class="episode-footer">
+            <div class="to-be-continued">À SUIVRE...</div>
+            <p style="margin-top: 15px; opacity: 0.8;">Épisode 3 : La Chute</p>
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="episode-nav">
+            <a href="episode_1.html">← Épisode 1</a>
+            <a href="index.html">Accueil</a>
+            <a href="episode_3.html">Épisode 3 →</a>
+        </div>
+
+    </div>
+</body>
+</html>

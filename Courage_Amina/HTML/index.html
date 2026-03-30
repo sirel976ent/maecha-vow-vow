@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Courage d'Amina - Webtoon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Bangers&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #1a1a2e;
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%; max-width: 450px; background: #0d0d1a;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 30px 20px;
+        }
+        .back-link {
+            display: inline-block; color: #888; font-size: 0.85em;
+            text-decoration: none; margin-bottom: 25px;
+            padding: 6px 16px; border: 1px solid #333;
+            border-radius: 20px; align-self: flex-start;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .back-link:hover { color: #e8b4bc; border-color: #e8b4bc; }
+        .series-logo {
+            font-size: 2.5em; margin-bottom: 10px;
+        }
+        h1 {
+            font-family: 'Bangers', cursive; font-size: 2.4em;
+            color: #e8b4bc; letter-spacing: 3px; text-align: center;
+            margin-bottom: 5px; line-height: 1.1;
+        }
+        .subtitle {
+            color: #888; font-size: 0.9em; text-align: center;
+            margin-bottom: 10px; line-height: 1.5;
+        }
+        .psp-badge {
+            display: inline-block; background: rgba(232,180,188,0.1);
+            border: 1px solid rgba(232,180,188,0.3); color: #e8b4bc;
+            font-size: 0.75em; padding: 4px 14px; border-radius: 20px;
+            margin-bottom: 30px; letter-spacing: 1px;
+        }
+        .section-label {
+            width: 100%; color: #444; font-size: 0.75em;
+            letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 15px; padding-bottom: 8px;
+            border-bottom: 1px solid #1e1e35;
+        }
+        .episode-card {
+            width: 100%;
+            background: linear-gradient(135deg, #1a1a2e, #2a1a2e);
+            border-radius: 15px; margin-bottom: 15px;
+            overflow: hidden; text-decoration: none; color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block; border: 1px solid rgba(232,180,188,0.1);
+        }
+        .episode-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(232,180,188,0.25);
+        }
+        .episode-card img {
+            width: 100%; height: 130px; object-fit: cover; object-position: top;
+        }
+        .episode-card .info {
+            padding: 14px 16px;
+        }
+        .ep-number {
+            font-family: 'Bangers', cursive; font-size: 1.2em;
+            color: #e8b4bc; letter-spacing: 1px;
+        }
+        .ep-title {
+            font-size: 0.95em; margin-top: 3px; opacity: 0.9; color: #ddd;
+        }
+        .ep-status {
+            font-size: 0.78em; margin-top: 6px; opacity: 0.55;
+        }
+        .badge {
+            display: inline-block; background: #e8b4bc; color: #1a0d1a;
+            font-size: 0.65em; font-weight: 700; padding: 2px 9px;
+            border-radius: 10px; margin-left: 8px; letter-spacing: 0.5px;
+        }
+        .badge.coming { background: #252535; color: #555; }
+        .footer-text {
+            color: #333; font-size: 0.78em; text-align: center;
+            margin-top: 35px; line-height: 1.8;
+        }
+        .footer-text a { color: #e8b4bc; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <a class="back-link" href="../../../index.html">← Toutes les séries</a>
+
+        <div class="series-logo">💗</div>
+        <h1>LE COURAGE<br>D'AMINA</h1>
+        <div class="subtitle">Manipulation, emprise et reconstruction<br>à Mayotte</div>
+        <div class="psp-badge">PSP MAYOTTE — SIREL976</div>
+
+        <div class="section-label">Les épisodes</div>
+
+        <!-- EP1 -->
+        <a class="episode-card" href="episode_1.html">
+            <img src="../IMAGES/EP1/1_00.png" alt="EP1 cover">
+            <div class="info">
+                <div class="ep-number">Épisode 1 <span class="badge">DISPONIBLE</span></div>
+                <div class="ep-title">Les Rêves d'Amina</div>
+                <div class="ep-status">11 planches &nbsp;•&nbsp; Espoir → Quotidien → Vulnérabilité</div>
+            </div>
+        </a>
+
+        <!-- EP2 -->
+        <a class="episode-card" href="episode_2.html">
+            <img src="../IMAGES/EP2/2_00.png" alt="EP2 cover">
+            <div class="info">
+                <div class="ep-number">Épisode 2 <span class="badge">DISPONIBLE</span></div>
+                <div class="ep-title">Les Promesses de David</div>
+                <div class="ep-status">11 planches &nbsp;•&nbsp; Curiosité → Flatterie → Piège</div>
+            </div>
+        </a>
+
+        <!-- EP3 -->
+        <a class="episode-card" href="episode_3.html">
+            <img src="../IMAGES/EP3/3_00.png" alt="EP3 cover">
+            <div class="info">
+                <div class="ep-number">Épisode 3 <span class="badge">DISPONIBLE</span></div>
+                <div class="ep-title">Le Piège du Silence</div>
+                <div class="ep-status">12 planches &nbsp;•&nbsp; Pression → Isolement → Effondrement</div>
+            </div>
+        </a>
+
+        <!-- EP4 -->
+        <a class="episode-card" href="episode_4.html">
+            <img src="../IMAGES/EP4/4_00.png" alt="EP4 cover">
+            <div class="info">
+                <div class="ep-number">Épisode 4 <span class="badge">DISPONIBLE</span></div>
+                <div class="ep-title">Dire la Vérité</div>
+                <div class="ep-status">11 planches &nbsp;•&nbsp; Confession → Écoute → Première lumière</div>
+            </div>
+        </a>
+
+        <!-- EP5 -->
+        <a class="episode-card" href="episode_5.html">
+            <img src="../IMAGES/EP5/5_00.png" alt="EP5 cover">
+            <div class="info">
+                <div class="ep-number">Épisode 5 <span class="badge" style="background:#d4a5a5;">FINAL</span></div>
+                <div class="ep-title">Le Courage de se Relever</div>
+                <div class="ep-status">11 planches &nbsp;•&nbsp; Aide → Reconstruction → Espoir</div>
+            </div>
+        </a>
+
+        <div class="footer-text">
+            Le Courage d'Amina — <a href="https://sirel976.com">Sirel976 Entreprise</a><br>
+            Sensibilisation à la manipulation et à l'emprise<br>
+            En partenariat avec PSP Mayotte
+        </div>
+
+    </div>
+</body>
+</html>

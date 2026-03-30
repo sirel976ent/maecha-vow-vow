@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Ciel Bleu de Mayotte - Épisode 3 : L'Engrenage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a1628; font-family: 'Comic Neue', cursive; display: flex; justify-content: center; }
+        .webtoon-container { width: 100%; max-width: 450px; background: #000; }
+        .episode-header { background: linear-gradient(135deg, #1a1a2e, #0a0a14); padding: 20px; text-align: center; color: white; }
+        .episode-header .series-name { font-size: 0.8em; color: #7a8aa8; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; opacity: 0.9; }
+        .episode-header h1 { font-family: 'Bangers', cursive; font-size: 1.8em; letter-spacing: 2px; color: #8aa0c8; }
+        .episode-header h2 { font-size: 1.1em; font-weight: normal; margin-top: 5px; opacity: 0.9; }
+        .panel { position: relative; width: 100%; overflow: hidden; }
+        .panel img { width: 100%; height: auto; display: block; }
+        .bubble { position: absolute; background: rgba(255,255,255,0.82); border: 2.5px solid #111; border-radius: 18px; padding: 9px 13px; font-size: 13px; line-height: 1.45; max-width: 62%; box-shadow: 2px 2px 0 rgba(0,0,0,0.25); }
+        .bubble.tl::after { content: ''; position: absolute; bottom: -13px; left: 22px; border-width: 13px 9px 0; border-style: solid; border-color: rgba(255,255,255,0.82) transparent transparent; }
+        .bubble.tl::before { content: ''; position: absolute; bottom: -17px; left: 20px; border-width: 16px 11px 0; border-style: solid; border-color: #111 transparent transparent; }
+        .bubble.tr::after { content: ''; position: absolute; bottom: -13px; right: 22px; border-width: 13px 9px 0; border-style: solid; border-color: rgba(255,255,255,0.82) transparent transparent; }
+        .bubble.tr::before { content: ''; position: absolute; bottom: -17px; right: 20px; border-width: 16px 11px 0; border-style: solid; border-color: #111 transparent transparent; }
+        .bubble.bl::after { content: ''; position: absolute; top: -13px; left: 22px; border-width: 0 9px 13px; border-style: solid; border-color: transparent transparent rgba(255,255,255,0.82); }
+        .bubble.bl::before { content: ''; position: absolute; top: -17px; left: 20px; border-width: 0 11px 16px; border-style: solid; border-color: transparent transparent #111; }
+        .bubble.br::after { content: ''; position: absolute; top: -13px; right: 22px; border-width: 0 9px 13px; border-style: solid; border-color: transparent transparent rgba(255,255,255,0.82); }
+        .bubble.br::before { content: ''; position: absolute; top: -17px; right: 20px; border-width: 0 11px 16px; border-style: solid; border-color: transparent transparent #111; }
+        .bubble.thought { border-style: dashed; font-style: italic; background: rgba(246,246,255,0.82); border-color: #555; }
+        .bubble.thought::after, .bubble.thought::before { display: none; }
+        .bubble.thought .dots { position: absolute; bottom: -26px; left: 16px; }
+        .bubble.thought .dots span { display: inline-block; width: 7px; height: 7px; background: rgba(246,246,255,0.82); border: 2px dashed #555; border-radius: 50%; margin-right: 3px; }
+        .bubble.thought .dots span:first-child { width: 10px; height: 10px; }
+        .narr { background: rgba(5,10,20,0.92); border-left: 3px solid #6a7a98; padding: 9px 13px; font-style: italic; font-size: 12px; color: #a0b4cc; line-height: 1.55; width: calc(100% - 28px); margin: 0 14px; position: absolute; }
+        /* Sound effects */
+        .sfx { position: absolute; font-family: 'Bangers', cursive; font-size: 24px; color: #6a9ab8; text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff; transform: rotate(-5deg); }
+        .panel-separator { height: 5px; background: #050a14; }
+        .ellipsis-panel { background: #050a14; padding: 40px 20px; text-align: center; }
+        .ellipsis-panel .dots-text { font-family: 'Bangers', cursive; font-size: 3em; color: #1a2a3a; letter-spacing: 8px; }
+        .time-marker { text-align: center; padding: 10px 0; font-family: 'Comic Neue', cursive; font-size: 11px; color: #2a3a52; letter-spacing: 2px; font-style: italic; background: #050a14; }
+        .episode-footer { background: linear-gradient(135deg, #050a14, #1a2a3a); padding: 30px 20px; text-align: center; color: white; }
+        .episode-footer .to-be-continued { font-family: 'Bangers', cursive; font-size: 2em; color: #8aa0c8; letter-spacing: 3px; }
+        .episode-nav { display: flex; justify-content: space-between; padding: 10px 20px; background: #030609; border-top: 1px solid #1a2a3a; }
+        .episode-nav a { color: #4aa8c8; text-decoration: none; font-size: 14px; }
+        @media (max-width: 450px) { .bubble { font-size: 12px; padding: 8px 11px; } .narr { font-size: 11px; } }
+    </style>
+</head>
+<body>
+<div class="webtoon-container">
+    <div class="episode-header">
+        <div class="series-name">Le Ciel Bleu de Mayotte</div>
+        <h1>ÉPISODE 3</h1>
+        <h2>L'Engrenage</h2>
+    </div>
+
+    <!-- 3_00 — Ciel qui bascule (transition) -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_00.png" alt="Ciel de Mayotte qui bascule du doré au sombre">
+        <div class="narr" style="bottom: 18px;">"Le lendemain matin. On m'a réveillée tôt."</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 3_01 — La révélation -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_01.png" alt="La meneuse révèle la vérité à Maria">
+        <div class="narr" style="top: 14px;">"La meneuse ne souriait plus. C'était une autre personne."</div>
+        <div class="bubble tr" style="top: 35%; left: 14px; max-width: 65%;">
+            Ce soir, tu vas recevoir quelqu'un. Tu fais ce qu'il demande, il paie, on partage.
+        </div>
+        <div class="bubble tl" style="top: 60%; right: 14px; max-width: 52%;">
+            Quoi ?! Non... Non, je ne peux pas faire ça !
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 3_02 — La menace -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_02.png" alt="La meneuse menace Maria, dos au mur">
+        <div class="bubble tr" style="top: 14px; left: 14px; max-width: 70%;">
+            Tu crois qu'on t'a hébergée gratuitement ? Tu nous dois. Et dehors, tu n'as rien. Personne. Réfléchis bien.
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 3_03 — Close-up larmes -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_03.png" alt="Close-up : Maria en larmes">
+        <div class="narr" style="bottom: 18px;">"Comment j'ai pu être aussi naïve ? Chaque gentillesse avait un prix. Et maintenant je ne pouvais plus refuser."</div>
+        <div class="bubble thought" style="top: 14px; right: 14px; max-width: 62%;">
+            Je veux rentrer chez moi... mais chez moi n'existe plus.
+            <div class="dots"><span></span><span></span></div>
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 3_04 — Pas de sortie -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_04.png" alt="Maria cherche une issue à la fenêtre barrée">
+        <div class="narr" style="bottom: 18px;">"J'ai cherché une issue. La porte était surveillée. La fenêtre trop haute. Et dehors, je ne connaissais personne. Personne ne me connaissait."</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 3_05 — Le soir tombe -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_05.png" alt="Maria au bord du lit, coucher de soleil">
+        <div class="narr" style="top: 14px;">"Le soleil s'est couché. Mes derniers espoirs avec lui."</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 3_06 — La porte s'ouvre -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_06.png" alt="La porte s'ouvre, ombre menaçante sur le sol">
+        <div class="narr" style="top: 14px;">"Des pas dans le couloir. La porte s'est ouverte. J'ai fermé les yeux."</div>
+        <div class="sfx" style="top: 14px; right: 18px; font-size: 28px; transform: rotate(-8deg);">CREAK</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 3_07 — Ellipse (porte fermée) -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_07.png" alt="Porte fermée — ellipse narrative">
+        <div class="narr" style="bottom: 18px;">...</div>
+        <div class="sfx" style="bottom: 50px; right: 18px; font-size: 22px;">CLAC</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 3_08 — L'après -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_08.png" alt="Maria brisée dans un coin, enveloppée dans une couverture">
+        <div class="narr" style="top: 14px;">"Quand tout a été fini, mon corps était toujours là. Mais une partie de moi était partie. Pour longtemps."</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <div class="time-marker">— Semaine 2. Semaine 3. Semaine 4... —</div>
+
+    <!-- 3_09 — Jours qui passent -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_09.png" alt="Maria silhouette à la fenêtre, regard absent">
+        <div class="narr" style="top: 14px;">"Les jours ont passé. Puis les semaines. Je ne comptais plus. Je survivais — c'est tout."</div>
+        <div class="bubble thought" style="bottom: 44px; right: 14px; max-width: 60%;">
+            Est-ce que quelqu'un me cherche ? Est-ce que quelqu'un va venir ?
+            <div class="dots"><span></span><span></span></div>
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 3_10 — Miroir brisé -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_10.png" alt="Maria devant un miroir brisé, ne se reconnaît plus">
+        <div class="narr" style="top: 14px;">"Je ne me reconnais plus."</div>
+        <div class="bubble thought" style="bottom: 44px; left: 14px; max-width: 64%;">
+            Celle qui est dans ce miroir... ce n'est pas moi. Ce n'est pas moi.
+            <div class="dots"><span></span><span></span></div>
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- 3_11 — Transition : étoile dans la nuit -->
+    <div class="panel">
+        <img src="../IMAGES/EP3/3_11.png" alt="Ciel nocturne, une seule étoile visible dans les nuages">
+        <div class="narr" style="bottom: 18px;">"Je survivais, jour après jour, dans un cauchemar sans fin. Mais même dans la nuit la plus sombre... parfois, une lumière finit par apparaître."</div>
+    </div>
+
+    <div class="episode-footer">
+        <div class="to-be-continued">À SUIVRE...</div>
+        <p style="margin-top: 12px; opacity: 0.8; font-size: 0.9em;">Épisode 4 : La Main Tendue</p>
+    </div>
+    <div class="episode-nav">
+        <a href="episode_2.html">← Épisode 2</a>
+        <a href="episode_4.html">Épisode 4 →</a>
+    </div>
+</div>
+</body>
+</html>

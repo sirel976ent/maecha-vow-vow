@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Ciel Bleu de Mayotte - Épisode 1 : L'Arrivée</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a1628;
+            font-family: 'Comic Neue', cursive;
+            display: flex;
+            justify-content: center;
+        }
+
+        .webtoon-container { width: 100%; max-width: 450px; background: #000; }
+
+        .episode-header {
+            background: linear-gradient(135deg, #1a5a7a, #0a1628);
+            padding: 20px; text-align: center; color: white;
+        }
+        .episode-header .series-name {
+            font-size: 0.8em; color: #4aa8c8; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 6px; opacity: 0.9;
+        }
+        .episode-header h1 {
+            font-family: 'Bangers', cursive; font-size: 1.8em;
+            letter-spacing: 2px; color: #4aa8c8;
+        }
+        .episode-header h2 { font-size: 1.1em; font-weight: normal; margin-top: 5px; opacity: 0.9; }
+
+        .panel { position: relative; width: 100%; overflow: hidden; }
+        .panel img { width: 100%; height: auto; display: block; }
+
+        /* Dialogue bubble — tail bottom-left by default */
+        .bubble {
+            position: absolute;
+            background: rgba(255,255,255,0.82); border: 2.5px solid #111;
+            border-radius: 18px; padding: 9px 13px;
+            font-size: 13px; line-height: 1.45;
+            max-width: 62%;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.25);
+        }
+        /* tail pointing down-left */
+        .bubble.tl::after {
+            content: ''; position: absolute; bottom: -13px; left: 22px;
+            border-width: 13px 9px 0; border-style: solid;
+            border-color: rgba(255,255,255,0.82) transparent transparent;
+        }
+        .bubble.tl::before {
+            content: ''; position: absolute; bottom: -17px; left: 20px;
+            border-width: 16px 11px 0; border-style: solid;
+            border-color: #111 transparent transparent;
+        }
+        /* tail pointing down-right */
+        .bubble.tr::after {
+            content: ''; position: absolute; bottom: -13px; right: 22px;
+            border-width: 13px 9px 0; border-style: solid;
+            border-color: rgba(255,255,255,0.82) transparent transparent;
+        }
+        .bubble.tr::before {
+            content: ''; position: absolute; bottom: -17px; right: 20px;
+            border-width: 16px 11px 0; border-style: solid;
+            border-color: #111 transparent transparent;
+        }
+        /* tail pointing up-left */
+        .bubble.bl::after {
+            content: ''; position: absolute; top: -13px; left: 22px;
+            border-width: 0 9px 13px; border-style: solid;
+            border-color: transparent transparent rgba(255,255,255,0.82);
+        }
+        .bubble.bl::before {
+            content: ''; position: absolute; top: -17px; left: 20px;
+            border-width: 0 11px 16px; border-style: solid;
+            border-color: transparent transparent #111;
+        }
+        /* tail pointing up-right */
+        .bubble.br::after {
+            content: ''; position: absolute; top: -13px; right: 22px;
+            border-width: 0 9px 13px; border-style: solid;
+            border-color: transparent transparent rgba(255,255,255,0.82);
+        }
+        .bubble.br::before {
+            content: ''; position: absolute; top: -17px; right: 20px;
+            border-width: 0 11px 16px; border-style: solid;
+            border-color: transparent transparent #111;
+        }
+
+        /* Thought bubble */
+        .bubble.thought {
+            border-style: dashed; font-style: italic;
+            background: rgba(246,246,255,0.82); border-color: #555;
+        }
+        .bubble.thought::after, .bubble.thought::before { display: none; }
+        .bubble.thought .dots { position: absolute; bottom: -26px; left: 16px; }
+        .bubble.thought .dots span {
+            display: inline-block; width: 7px; height: 7px;
+            background: rgba(246,246,255,0.82); border: 2px dashed #555;
+            border-radius: 50%; margin-right: 3px;
+        }
+        .bubble.thought .dots span:first-child { width: 10px; height: 10px; }
+
+        /* Narrator box */
+        .narr {
+            background: rgba(8, 18, 35, 0.88);
+            border-left: 3px solid #4aa8c8;
+            padding: 9px 13px; font-style: italic;
+            font-size: 12px; color: #c0dff0; line-height: 1.55;
+            width: calc(100% - 28px); margin: 0 14px;
+            position: absolute;
+        }
+
+        /* Sound effects */
+        .sfx {
+            position: absolute; font-family: 'Bangers', cursive; font-size: 24px;
+            color: #4aa8d8; text-shadow: 2px 2px 0 #000, -1px -1px 0 #fff;
+            transform: rotate(-5deg);
+        }
+
+        .panel-separator { height: 5px; background: #0a1628; }
+
+        .episode-footer {
+            background: linear-gradient(135deg, #0a1628, #1a5a7a);
+            padding: 30px 20px; text-align: center; color: white;
+        }
+        .episode-footer .to-be-continued {
+            font-family: 'Bangers', cursive; font-size: 2em;
+            color: #4aa8c8; letter-spacing: 3px;
+        }
+
+        .episode-nav {
+            display: flex; justify-content: space-between;
+            padding: 10px 20px; background: #070f1a;
+            border-top: 1px solid #1a3a5a;
+        }
+        .episode-nav a { color: #4aa8c8; text-decoration: none; font-size: 14px; }
+        .episode-nav .off { color: #1e3a52; font-size: 14px; }
+
+        @media (max-width: 450px) {
+            .bubble { font-size: 12px; padding: 8px 11px; }
+            .narr { font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+<div class="webtoon-container">
+
+    <div class="episode-header">
+        <div class="series-name">Le Ciel Bleu de Mayotte</div>
+        <h1>ÉPISODE 1</h1>
+        <h2>L'Arrivée</h2>
+    </div>
+
+    <!-- ——— 1_00 ——— Mer nocturne (paysage, pas de personnage) -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_00.png" alt="Lagon de Mayotte la nuit">
+        <div class="narr" style="bottom: 18px;">
+            "Je m'appelle Maria. J'avais 20 ans et je traversais la mer dans le noir, sur un kwassa-kwassa trop petit pour vingt personnes. Je ne savais pas nager. Mais quand on n'a plus rien à perdre, la mer fait moins peur."
+        </div>
+        <div class="sfx" style="bottom: 80px; right: 18px; font-size: 18px; color: #2a6a8a; transform: rotate(0deg);">~ ~ ~</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 1_01 ——— Maria sur le kwassa, regard vers l'île -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_01.png" alt="Maria dans le kwassa, regard vers Mayotte">
+        <div class="narr" style="top: 14px;">
+            "On m'avait dit : Mayotte, c'est la chance. Du travail, une vie possible. Je voulais y croire."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 1_02 ——— Arrivée sur la plage, regard sur le sable -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_02.png" alt="Maria pose le pied sur la plage à l'aube">
+        <div class="narr" style="bottom: 18px;">
+            "Mes pieds ont touché le sable de Mayotte à l'aube. Un sol étranger. Un nouveau départ. C'est ce que je me disais."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 1_03 ——— Perdue dans le marché de Mamoudzou -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_03.png" alt="Maria perdue au marché de Mamoudzou">
+        <div class="narr" style="top: 14px;">
+            "Mamoudzou. La ville grondait autour de moi. Je répétais les noms dans ma tête comme si ça m'aiderait à m'y retrouver. Ça ne m'aidait pas."
+        </div>
+        <div class="sfx" style="top: 60px; right: 18px; font-size: 16px;">RUMBLE...</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 1_04 ——— Close-up Maria épuisée, regard vers le bas -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_04.png" alt="Close-up : Maria épuisée, regard baissé">
+        <div class="narr" style="bottom: 18px;">
+            "La faim. La soif. La peur. Tout en même temps. J'avais besoin d'aide — n'importe quelle aide."
+        </div>
+        <div class="bubble thought" style="top: 14px; right: 14px; max-width: 60%;">
+            Je n'ai plus d'argent, plus de force... Qu'est-ce que je vais devenir ?
+            <div class="dots"><span></span><span></span></div>
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 1_05 ——— Maria recroquevillée dans la ruelle -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_05.png" alt="Maria seule dans une ruelle, dos au mur">
+        <div class="narr" style="top: 14px;">
+            "Le soir tombait. Je n'avais nulle part où aller. J'étais prête à accepter n'importe quoi."
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 1_06 ——— Les filles approchent -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_06.png" alt="Trois jeunes femmes s'approchent de Maria assise">
+        <div class="narr" style="top: 14px;">
+            "C'est là qu'elles sont arrivées."
+        </div>
+        <div class="bubble tl" style="top: 20%; right: 14px; max-width: 58%;">
+            Hé... ça va ? T'as l'air perdue.
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 1_07 ——— Geste de bonté, bouteille d'eau -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_07.png" alt="La meneuse tend de l'eau à Maria">
+        <div class="bubble tr" style="top: 12px; right: 14px; max-width: 60%;">
+            Tiens, bois. T'as l'air d'en avoir besoin.
+        </div>
+        <div class="bubble bl" style="bottom: 50px; left: 14px; max-width: 55%;">
+            Merci... merci beaucoup...
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 1_08 ——— Proposition d'hébergement -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_08.png" alt="La meneuse propose un toit à Maria">
+        <div class="narr" style="top: 14px;">
+            "J'étais épuisée. Seule. Et quelqu'un m'offrait un toit. Dans cet état-là, on n'analyse pas. On accepte."
+        </div>
+        <div class="bubble tl" style="top: 22%; right: 14px; max-width: 60%;">
+            T'as nulle part où aller ? Viens avec nous, on a de la place.
+        </div>
+        <div class="bubble tl" style="top: 48%; left: 14px; max-width: 55%;">
+            Vraiment ? Vous feriez ça pour moi ?
+        </div>
+        <div class="bubble bl" style="bottom: 40px; right: 14px; max-width: 55%;">
+            Entre filles, on s'entraide.
+        </div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 1_09 ——— Marche ensemble dans la rue -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_09.png" alt="Maria marche avec les quatre filles dans une rue de Mamoudzou">
+        <div class="narr" style="top: 14px;">
+            "Pour la première fois depuis mon arrivée, je n'étais plus seule. J'aurais dû me demander pourquoi ces filles aidaient une étrangère. Je ne me suis pas posé la question."
+        </div>
+        <div class="sfx" style="bottom: 18px; left: 18px; font-size: 14px;">TAP TAP</div>
+    </div>
+    <div class="panel-separator"></div>
+
+    <!-- ——— 1_10 ——— Toits nocturnes (paysage, pas de personnage) -->
+    <div class="panel">
+        <img src="../IMAGES/EP1/1_10.png" alt="Nuit sur les toits de Mayotte">
+        <div class="narr" style="bottom: 18px;">
+            "Cette nuit-là, j'ai dormi sous un toit pour la première fois depuis mon arrivée. Je ne savais pas encore que certains pièges ont des draps propres et des portes qui ferment bien."
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="episode-footer">
+        <div class="to-be-continued">À SUIVRE...</div>
+        <p style="margin-top: 12px; opacity: 0.8; font-size: 0.9em;">Épisode 2 : Le Faux Refuge</p>
+    </div>
+
+    <div class="episode-nav">
+        <a href="index.html">← Tous les épisodes</a>
+        <a href="episode_2.html">Épisode 2 →</a>
+    </div>
+
+</div>
+</body>
+</html>
