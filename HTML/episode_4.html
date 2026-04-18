@@ -34,15 +34,21 @@
 
         /* BULLES DIALOGUE */
         .bubble {
-            position: absolute; background: white; border: 3px solid #000;
-            border-radius: 20px; padding: 12px 16px; font-size: 14px;
-            line-height: 1.4; max-width: 70%;
+            position: absolute;
+            background: rgb(255 255 255 / 75%);
+            border: 3px solid #000;
+            border-radius: 20px;
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 1.4;
+            max-width: 70%;
             box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
         }
+
         .bubble::after {
             content: ''; position: absolute; bottom: -15px; left: 30px;
             border-width: 15px 10px 0; border-style: solid;
-            border-color: white transparent transparent;
+            border-color: rgba(255, 255, 255, 0.95) transparent transparent;
         }
         .bubble::before {
             content: ''; position: absolute; bottom: -20px; left: 28px;
@@ -53,11 +59,11 @@
         .bubble.right::before { left: auto; right: 28px; }
 
         /* BULLES PENSEE */
-        .bubble.thought { border-radius: 50%; font-style: italic; background: #f8f8f8; }
+        .bubble.thought { border-radius: 50%; font-style: italic; background: rgba(248, 248, 248, 0.95); }
         .bubble.thought::after, .bubble.thought::before { display: none; }
         .bubble.thought .thought-dots { position: absolute; bottom: -25px; left: 20px; }
         .bubble.thought .thought-dots span {
-            display: inline-block; background: #f8f8f8;
+            display: inline-block; background: rgba(248, 248, 248, 0.95);
             border: 2px solid #000; border-radius: 50%; margin: 0 2px;
         }
         .bubble.thought .thought-dots span:nth-child(1) { width: 12px; height: 12px; }
@@ -85,8 +91,10 @@
             text-align: center; width: 90%;
         }
 
-        /* SEPARATEUR */
-        .panel-separator { height: 5px; background: #1a1a2e; }
+        /* SEPARATEUR — espace scroll webtoon */
+        .panel-separator { height: 30px; background: #1a1a2e; }
+        .panel-separator.large { height: 60px; }
+        .panel-separator.xlarge { height: 90px; }
 
         /* FOOTER */
         .episode-footer {
@@ -139,7 +147,7 @@
             </div>
 
             <div class="bubble right" style="top: 100px; right: 15px; max-width: 75%;">
-                Y'a une association Mlezi Maore, ils ont un service appelé PSP. Ils aident les jeunes comme toi.
+                Y'a une association Mlezi Maore, ils ont un service appelé PSP. Ils accompagnent et orientent les jeunes comme toi.
             </div>
 
             <div class="bubble" style="bottom: 70px; left: 15px; max-width: 55%;">
@@ -147,7 +155,7 @@
             </div>
 
             <div class="bubble right" style="bottom: 15px; right: 15px; max-width: 40%;">
-                Non. Promis.
+                Non. Promis. C'est des pros.
             </div>
         </div>
         <div class="panel-separator"></div>
@@ -199,7 +207,7 @@
             <img src="../IMAGES/EP4/4_05.png" alt="Maya accueille Inaya dans son bureau">
 
             <div class="bubble right" style="top: 20px; right: 15px; max-width: 75%;">
-                Bienvenue Inaya. Assieds-toi, tu es en sécurité ici.
+                Bienvenue Inaya. Assieds-toi, tu es en sécurité ici., tout ce que tu diras resteras confidentiel
             </div>
         </div>
         <div class="panel-separator"></div>
