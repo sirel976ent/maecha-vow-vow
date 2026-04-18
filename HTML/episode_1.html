@@ -92,6 +92,30 @@
             text-align: center; width: 90%;
         }
 
+        /* INTRO CARD */
+        .intro-card {
+            background: linear-gradient(135deg, #2E86AB, #1a1a2e);
+            padding: 30px 20px; margin: 0; color: white;
+        }
+        .intro-label {
+            font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px;
+            opacity: 0.8; margin-bottom: 10px;
+        }
+        .intro-title {
+            font-family: 'Bangers', cursive; font-size: 2em;
+            color: #F6AE2D; letter-spacing: 2px; margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .intro-card p {
+            margin-bottom: 15px; line-height: 1.6; font-size: 0.95em;
+        }
+        .intro-card strong { color: #F6AE2D; font-weight: bold; }
+        .intro-note {
+            margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1);
+            border-left: 4px solid #F6AE2D; font-style: italic;
+            border-radius: 4px;
+        }
+
         /* SEPARATEUR — espace scroll webtoon */
         .panel-separator { height: 30px; background: #1a1a2e; }
         .panel-separator.large { height: 60px; }
@@ -130,6 +154,34 @@
         </div>
 
         <!-- ================================================ -->
+        <!-- CARTON INTRO - contexte Mayotte                  -->
+        <!-- ================================================ -->
+        <div class="intro-card">
+            <div class="intro-label">Avant de commencer</div>
+            <div class="intro-title">BIENVENUE<br>À MAYOTTE</div>
+            <p>
+                <strong>Mayotte</strong> est une île française de l'océan Indien, située entre
+                <strong>Madagascar</strong> et l'archipel des <strong>Comores</strong>.
+                C'est le 101ᵉ département français depuis 2011.
+            </p>
+            <p>
+                L'histoire se déroule à <strong>Mamoudzou</strong>, la capitale, nichée entre
+                collines verdoyantes et lagon turquoise. On y parle <strong>français</strong>,
+                mais aussi <strong>shimaoré</strong> et <strong>kibushi</strong> — des langues
+                que vous entendrez dans les dialogues.
+            </p>
+            <p>
+                Les maisons en parpaings colorés, les toits de tôle, les manguiers et les
+                baobabs font le décor quotidien d'<strong>Inaya</strong>, jeune lycéenne de
+                17 ans. Son histoire commence ici, un jeudi ordinaire après les cours…
+            </p>
+            <div class="intro-note">
+                Kwezi ! <span style="opacity:0.7">(« Bonjour » en shimaoré)</span>
+            </div>
+        </div>
+        <div class="panel-separator"></div>
+
+        <!-- ================================================ -->
         <!-- 1_00 : Vue panoramique du port de Mamoudzou     -->
         <!-- Narration voix off : contexte Mayotte            -->
         <!-- ================================================ -->
@@ -137,17 +189,7 @@
             <img src="../IMAGES/EP1/1_00.png" alt="Vue panoramique du port de Mamoudzou au coucher du soleil">
 
             <div class="narrator-box" style="top: 4%; left: 15px; max-width: 70%;">
-                Quelque part dans l'océan Indien...
-            </div>
-
-            <div class="narrator-box" style="top: 26%; right: 15px; max-width: 70%;">
-                Entre Madagascar et les Comores,<br>
-                une île française de 374 km².
-            </div>
-
-            <div class="narrator-box" style="top: 52%; left: 15px; max-width: 72%;">
-                Ici on parle français, shimaoré et kibushi.<br>
-                On vit entre lagon turquoise et collines vertes.
+                Quai de la barge à Mamoudzou, Mayotte...
             </div>
 
             <div class="narrator-box" style="bottom: 4%; right: 15px; max-width: 72%; font-weight: bold;">
@@ -162,8 +204,12 @@
         <!-- ================================================ -->
         <div class="panel">
             <img src="../IMAGES/EP1/1_01.png" alt="Inaya marche dans le quartier entre les bangas">
-            <div class="narrator-box" style="bottom: 15px; left: 15px;">
+            <div class="narrator-box" style="top: 4%; left: 15px; max-width: 70%;">
                 Fin de journée au lycée...
+            </div>
+
+            <div class="narrator-box" style="bottom: 15px; left: 15px;">
+                Inaya, rentre chez elle, en passant à côté des maisons en bidonville, appelé également des bangas
             </div>
         </div>
         <div class="panel-separator"></div>
@@ -175,11 +221,13 @@
             <img src="../IMAGES/EP1/1_02.png" alt="Inaya arrive à la porte du banga, sa mère l'accueille">
 
             <div class="bubble" style="top: 15px; left: 15px; max-width: 55%; font-weight: bold;">
-                Kwezi mama !
+                *Kwezi mama !*<br>
+                <span style="font-size: 0.85em; font-style: italic; opacity: 0.8;">(Bonjour maman)</span>
             </div>
 
-            <div class="bubble right" style="bottom: 40px; right: 15px; max-width: 65%;">
-                Navoné mwanangu ! jéjé licoli ?
+            <div class="bubble right" style="bottom: 382px; right: 15px; max-width: 65%;">
+                *Navoné mwanangu ! jéjé licoli ?*<br>
+                <span style="font-size: 0.85em; font-style: italic; opacity: 0.8;">(Bonjour ma fille, l'école s'est bien déroulé ?)</span>
             </div>
         </div>
         <div class="panel-separator"></div>
@@ -190,8 +238,9 @@
         <div class="panel">
             <img src="../IMAGES/EP1/1_03.png" alt="La mère d'Inaya cuisine dans la cuisine du banga">
 
-            <div class="bubble right" style="top: 20px; right: 15px; max-width: 65%;">
-                Va te reposer, le mataba sera prêt dans dix minutes !
+            <div class="bubble right" style="top: -2px; right: 15px; max-width: 65%;">
+                Va te reposer, le *mataba* sera prêt dans dix minutes !<br>
+                <span style="font-size: 0.85em; font-style: italic; opacity: 0.8;">(plat à base de feuilles de manioc)</span>
             </div>
 
             <div class="sfx" style="bottom: 30px; left: 20px; font-size: 18px; color: #D4A574; transform: rotate(-3deg);">
@@ -227,7 +276,7 @@
             <img src="../IMAGES/EP1/1_05.png" alt="Inaya scrolle sur le canapé, mère cuisine en arrière-plan">
 
             <div class="narrator-box" style="top: 15px; left: 15px;">
-                Comme chaque soir après les cours...
+                Comme chaque soir après les cours, Inaya passe du temps sur ton téléphone...
             </div>
 
             <div class="sfx" style="bottom: 50px; right: 20px;">
@@ -247,7 +296,7 @@
             </div>
 
             <div class="narrator-box" style="bottom: 15px; left: 15px; max-width: 75%;">
-                Perdue dans son écran, comme chaque soir...
+                Perdue dans son écran, comme chaque soir, elle pensait à une chose en particulier quand soudain ...
             </div>
         </div>
         <div class="panel-separator"></div>
@@ -262,7 +311,7 @@
                 <span>🔔</span> @ModeQueen976
             </div>
 
-            <div style="position: absolute; top: 55px; right: 15px; background: linear-gradient(135deg, #5865F2, #7289DA); color: white; border-radius: 15px 15px 4px 15px; padding: 12px 15px; font-size: 13px; max-width: 70%; box-shadow: 0 4px 15px rgba(0,0,0,0.3); line-height: 1.5;">
+            <div style="position: absolute;top: 55px;right: 15px;background: linear-gradient(135deg, #5865f2b5, #7289daa1);color: white;border-radius: 15px 15px 4px 15px;padding: 12px 15px;font-size: 13px;max-width: 70%;box-shadow: 0 4px 15px rgba(0,0,0,0.3);line-height: 1.5;">
                 Salam ma belle 😍 ça te dirait de gagner de l'argent avec tes photos ? J'ai une appli qui paye super bien 💰
             </div>
 
