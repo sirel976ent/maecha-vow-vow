@@ -92,8 +92,10 @@
             text-align: center; width: 90%;
         }
 
-        /* SEPARATEUR */
-        .panel-separator { height: 5px; background: #1a1a2e; }
+        /* SEPARATEUR — espace scroll webtoon */
+        .panel-separator { height: 30px; background: #1a1a2e; }
+        .panel-separator.large { height: 60px; }
+        .panel-separator.xlarge { height: 90px; }
 
         /* FOOTER */
         .episode-footer {
@@ -128,16 +130,32 @@
         </div>
 
         <!-- ================================================ -->
-        <!-- 1_00 : Vue panoramique du port de Mamoudzou -->
+        <!-- 1_00 : Vue panoramique du port de Mamoudzou     -->
+        <!-- Narration voix off : contexte Mayotte            -->
         <!-- ================================================ -->
         <div class="panel">
             <img src="../IMAGES/EP1/1_00.png" alt="Vue panoramique du port de Mamoudzou au coucher du soleil">
-            <div class="narrator-box" style="top: 15px; left: 15px;">
-                Mamoudzou, Mayotte.<br>
-                Un jeudi comme les autres...
+
+            <div class="narrator-box" style="top: 4%; left: 15px; max-width: 70%;">
+                Quelque part dans l'océan Indien...
+            </div>
+
+            <div class="narrator-box" style="top: 26%; right: 15px; max-width: 70%;">
+                Entre Madagascar et les Comores,<br>
+                une île française de 374 km².
+            </div>
+
+            <div class="narrator-box" style="top: 52%; left: 15px; max-width: 72%;">
+                Ici on parle français, shimaoré et kibushi.<br>
+                On vit entre lagon turquoise et collines vertes.
+            </div>
+
+            <div class="narrator-box" style="bottom: 4%; right: 15px; max-width: 72%; font-weight: bold;">
+                Mamoudzou, la capitale.<br>
+                Un jeudi comme les autres…
             </div>
         </div>
-        <div class="panel-separator"></div>
+        <div class="panel-separator xlarge"></div>
 
         <!-- ================================================ -->
         <!-- 1_01 : Inaya rentre de l'école dans le quartier -->
